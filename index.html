@@ -17,11 +17,11 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
-<meta name="google-site-verification" content="PB3lWW6G3FccAT72e65ehI6ILq12ZxNzS_RUsXDVufE" />
+  <!-- Socket.IO client for real-time features -->
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
   <style>
-    /* ===== LUCKY INVESTMENT — REDESIGNED 2025 (ULTRA PREMIUM) ===== */
+    /* ===== LUCKY INVESTMENT — ULTRA PREMIUM REDESIGN 2025 ===== */
     :root {
-      /* Enhanced palette with deeper cosmic + electric blue + vibrant gold */
       --primary-50: #eff6ff;
       --primary-100: #dbeafe;
       --primary-200: #bfdbfe;
@@ -100,7 +100,7 @@
       --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.15);
     }
 
-    /* RESET & BASE with advanced animations */
+    /* RESET & BASE */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     body {
@@ -123,7 +123,7 @@
     ::-webkit-scrollbar-thumb:hover { background: var(--primary-500); }
     ::selection { background: rgba(59, 130, 246, 0.3); color: var(--text-primary); }
 
-    /* ANIMATED BACKGROUND - enhanced with more orbs */
+    /* ANIMATED BACKGROUND */
     .bg-canvas {
       position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
     }
@@ -150,7 +150,7 @@
     #app { position: relative; z-index: 1; min-height: 100vh; }
     .app-layout { display: flex; min-height: 100vh; }
 
-    /* NAVBAR - glassmorphism with glow */
+    /* NAVBAR */
     .navbar {
       position: fixed; top: 0; left: 0; right: 0; height: var(--navbar-h);
       background: var(--bg-glass-heavy);
@@ -229,7 +229,7 @@
     }
     .hamburger:hover { border-color: var(--border-medium); color: var(--primary-400); }
 
-    /* SIDEBAR - refined */
+    /* SIDEBAR */
     .sidebar {
       position: fixed; top: var(--navbar-h); left: 0; bottom: 0;
       width: var(--sidebar-w); background: var(--bg-glass-heavy);
@@ -362,7 +362,7 @@
     }
     .trust-badge i { color: var(--primary-400); font-size: 0.85rem; }
 
-    /* FORM ELEMENTS - elevated */
+    /* FORM ELEMENTS */
     .form-group { margin-bottom: 20px; position: relative; }
     .form-label {
       display: block; font-size: 0.85rem; font-weight: 500;
@@ -408,7 +408,7 @@
       content: ''; flex: 1; height: 1px; background: var(--border-light);
     }
 
-    /* BUTTONS - with micro-interactions */
+    /* BUTTONS */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;
@@ -457,7 +457,7 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* CARDS - with glowing borders */
+    /* CARDS */
     .card {
       background: var(--bg-card); border: 1px solid var(--border-light);
       border-radius: var(--radius-lg); padding: 24px;
@@ -468,7 +468,7 @@
     .card-title { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
     .card-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
 
-    /* STAT CARDS - premium */
+    /* STAT CARDS */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 28px; }
     .stat-card {
       background: var(--bg-card); border: 1px solid var(--border-light);
@@ -542,7 +542,7 @@
     .tab-btn:hover { color: var(--text-primary); background: rgba(59, 130, 246, 0.08); }
     .tab-btn.active { background: var(--primary-600); color: #fff; box-shadow: var(--shadow-sm); }
 
-    /* PLAN CARDS - upgraded for 8 global indexes */
+    /* PLAN CARDS */
     .plans-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; margin-bottom: 32px; }
     .plan-card {
       background: var(--bg-card); border: 1px solid var(--border-light);
@@ -737,7 +737,7 @@
     .admin-stat .val { font-family: var(--font-mono); font-size: 1.8rem; font-weight: 500; color: var(--primary-400); }
     .admin-stat .lbl { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
 
-    /* TOASTS (enhanced) */
+    /* TOASTS */
     .toast-container {
       position: fixed; top: 90px; right: 24px; z-index: 1000;
       display: flex; flex-direction: column; gap: 12px; pointer-events: none;
@@ -825,7 +825,7 @@
     .install-banner .ib-text p { font-size: 0.8rem; color: var(--text-muted); }
     .install-banner .ib-actions { display: flex; gap: 10px; }
 
-    /* TICKER - animated */
+    /* TICKER */
     .ticker-wrap { overflow: hidden; border-bottom: 1px solid var(--border-light); padding: 10px 0; }
     .ticker-inner { display: flex; gap: 0; animation: tickerScroll 40s linear infinite; white-space: nowrap; width: max-content; }
     .ticker-inner:hover { animation-play-state: paused; }
@@ -838,6 +838,107 @@
     .ticker-item .price { color: var(--text-primary); }
     .ticker-item .chg.up { color: var(--accent-emerald); }
     .ticker-item .chg.down { color: var(--accent-rose); }
+
+    /* FILE UPLOAD (ENHANCED) */
+    .file-upload-area {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-base);
+      position: relative;
+    }
+    .file-upload-area.drag-over {
+      border-color: var(--primary-500);
+      background: rgba(59, 130, 246, 0.05);
+    }
+    .file-upload-area input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer;
+    }
+    .file-upload-icon { font-size: 2.2rem; color: var(--primary-400); margin-bottom: 8px; }
+    .file-upload-text { font-size: 0.9rem; font-weight: 500; }
+    .file-upload-hint { font-size: 0.7rem; color: var(--text-muted); margin-top: 6px; }
+    .file-preview {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm); padding: 12px 16px; margin-top: 12px;
+      position: relative;
+    }
+    .file-preview img { width: 48px; height: 48px; object-fit: cover; border-radius: var(--radius-xs); }
+    .file-preview .fname { font-weight: 500; font-size: 0.9rem; }
+    .file-preview .fsize { font-size: 0.75rem; color: var(--text-muted); }
+    .file-preview .fremove {
+      position: absolute; right: 8px; top: 8px; width: 24px; height: 24px;
+      border-radius: 6px; background: rgba(244, 63, 94, 0.1); color: var(--accent-rose);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: 0.8rem; transition: var(--transition-base);
+    }
+    .file-preview .fremove:hover { background: rgba(244, 63, 94, 0.2); }
+
+    /* NOTIFICATION PANEL */
+    .notif-panel {
+      position: fixed; top: var(--navbar-h); right: -320px; width: 320px; max-width: calc(100% - 24px);
+      background: var(--bg-glass-heavy); border: 1px solid var(--border-light);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      backdrop-filter: blur(20px); padding: 20px; z-index: 99;
+      transition: right var(--transition-base); max-height: calc(100vh - var(--navbar-h) - 20px);
+      overflow-y: auto; box-shadow: var(--shadow-lg);
+    }
+    .notif-panel.show { right: 16px; }
+    .notif-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .notif-panel-header h4 { font-family: var(--font-display); font-weight: 600; }
+    .notif-list { display: flex; flex-direction: column; gap: 8px; }
+    .notif-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 12px;
+      border-radius: var(--radius-sm); border: 1px solid var(--border-light);
+      cursor: pointer; transition: var(--transition-base);
+    }
+    .notif-item:hover { background: var(--bg-card-hover); border-color: var(--border-medium); }
+    .notif-item.unread { background: rgba(59, 130, 246, 0.05); border-color: var(--primary-400); }
+    .notif-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .notif-content { flex: 1; min-width: 0; }
+    .notif-title { font-weight: 500; font-size: 0.9rem; }
+    .notif-msg { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+    .notif-time { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+    .notif-dot { width: 8px; height: 8px; background: var(--primary-400); border-radius: 50%; flex-shrink: 0; }
+
+    /* SUMMARY BOX */
+    .summary-box {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-md); padding: 16px; margin: 16px 0;
+    }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
+    .summary-row .label { color: var(--text-secondary); }
+    .summary-row .value { font-weight: 500; }
+    .mono { font-family: var(--font-mono); }
+
+    /* PAYMENT METHODS */
+    .payment-methods {
+      display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;
+    }
+    .pay-method {
+      flex: 1; min-width: 100px; background: var(--bg-card);
+      border: 1px solid var(--border-light); border-radius: var(--radius-sm);
+      padding: 12px 8px; text-align: center; cursor: pointer;
+      transition: var(--transition-base); display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .pay-method i { font-size: 1.2rem; color: var(--text-muted); }
+    .pay-method span { font-size: 0.8rem; font-weight: 500; }
+    .pay-method:hover { border-color: var(--border-medium); background: var(--bg-card-hover); }
+    .pay-method.selected { border-color: var(--primary-500); background: rgba(59, 130, 246, 0.1); }
+    .pay-method.selected i { color: var(--primary-400); }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center; padding: 48px 24px; color: var(--text-muted);
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: 16px; opacity: 0.5; }
+    .empty-state h4 { font-weight: 500; margin-bottom: 8px; }
 
     /* RESPONSIVE */
     @media (max-width: 1200px) {
@@ -908,7 +1009,7 @@
 </head>
 <body>
 
-<!-- BG CANVAS (enhanced) -->
+<!-- BG CANVAS -->
 <div class="bg-canvas">
   <div class="bg-orb o1"></div>
   <div class="bg-orb o2"></div>
@@ -1345,15 +1446,15 @@
         </div>
       </section>
 
-      <!-- INVESTMENTS SECTION with 8 Global Index Plans -->
+      <!-- INVESTMENTS SECTION with 8 Stock Investment Plans (matching backend) -->
       <section id="investments-section" class="section">
         <div class="breadcrumb"><i class="fa fa-home"></i><span class="sep">/</span><span>Investments</span></div>
         <div class="section-header">
-          <h1>Global Index Plans</h1>
-          <p>Invest in world‑leading stock market indexes</p>
+          <h1>Stock Investment Plans</h1>
+          <p>Invest in top‑performing stock market funds</p>
         </div>
         <div class="tabs">
-          <button class="tab-btn active" onclick="switchInvTab('plans',this)">📊 Index Plans</button>
+          <button class="tab-btn active" onclick="switchInvTab('plans',this)">📊 Available Plans</button>
           <button class="tab-btn" onclick="switchInvTab('my',this)">💼 My Investments</button>
         </div>
 
@@ -2197,15 +2298,16 @@
 
 </div><!-- /#app -->
 
+<!-- ========== ORIGINAL SCRIPT (PRESERVED) WITH UPDATED FALLBACK PLANS ========== -->
 <script>
 /* ===== LUCKY INVESTMENT — BACKEND INTEGRATION (UNCHANGED FUNCTIONALITY) ===== */
-/* The entire original JavaScript block from the user's code is preserved below. 
+/* The entire original JavaScript block from the user's code is preserved below.
    Only the visual design (CSS) and some HTML structure (class additions) have been upgraded.
-   Added fallback for 8 global index plans in renderPlans(). */
+   Added fallback for 8 stock investment plans in renderPlans(). */
 /* ─── CONSTANTS ─── */
 const APP_NAME = 'Lucky Investment';
 const BRAND_PREFIX = 'luckyinv_';
-const API_URL = 'https://real-wealthy-1.onrender.com/api';
+const API_URL = 'https://real-wealthy-1-1.onrender.com/api';
 
 /* ─── CURRENCY RATES (vs NGN) ─── */
 const CURRENCY_RATES = {NGN:1,USD:0.00065,EUR:0.00060,GBP:0.00052,GHS:0.0087,KES:0.085,ZAR:0.012};
@@ -2646,16 +2748,16 @@ async function loadInvestments() {
   renderMyInvestments();
 }
 
-/* 8 global indexes as fallback plans */
+/* 8 STOCK INVESTMENT PLANS (matching backend) */
 const FALLBACK_PLANS = [
-  { _id: 'plan1', name: 'S&P 500', description: 'Top 500 US companies', raw_material: 'USA', category: 'Large Cap', daily_interest: 0.85, total_interest: 25.5, duration: 30, min_amount: 5000, max_amount: 10000000, icon: '🇺🇸', is_popular: true, color: 'rgba(59,130,246,0.12)' },
-  { _id: 'plan2', name: 'Dow Jones', description: '30 blue-chip US stocks', raw_material: 'USA', category: 'Blue Chip', daily_interest: 0.72, total_interest: 21.6, duration: 30, min_amount: 7000, max_amount: 10000000, icon: '🏭', color: 'rgba(59,130,246,0.12)' },
-  { _id: 'plan3', name: 'NASDAQ', description: 'Tech-heavy index', raw_material: 'USA', category: 'Technology', daily_interest: 1.10, total_interest: 33.0, duration: 30, min_amount: 8000, max_amount: 10000000, icon: '📡', color: 'rgba(59,130,246,0.12)' },
-  { _id: 'plan4', name: 'Nikkei 225', description: 'Japan’s premier index', raw_material: 'Japan', category: 'Asia', daily_interest: 0.65, total_interest: 19.5, duration: 30, min_amount: 6000, max_amount: 10000000, icon: '🗾', color: 'rgba(251,191,36,0.12)' },
-  { _id: 'plan5', name: 'FTSE 100', description: 'UK’s top 100 companies', raw_material: 'UK', category: 'Europe', daily_interest: 0.60, total_interest: 18.0, duration: 30, min_amount: 5000, max_amount: 10000000, icon: '🇬🇧', color: 'rgba(16,185,129,0.12)' },
-  { _id: 'plan6', name: 'DAX', description: '40 major German firms', raw_material: 'Germany', category: 'Europe', daily_interest: 0.68, total_interest: 20.4, duration: 30, min_amount: 6000, max_amount: 10000000, icon: '🇩🇪', color: 'rgba(251,191,36,0.12)' },
-  { _id: 'plan7', name: 'Shanghai Composite', description: 'All A-shares in Shanghai', raw_material: 'China', category: 'Asia', daily_interest: 0.95, total_interest: 28.5, duration: 30, min_amount: 10000, max_amount: 10000000, icon: '🇨🇳', color: 'rgba(244,63,94,0.12)' },
-  { _id: 'plan8', name: 'Sensex', description: '30 large Indian stocks', raw_material: 'India', category: 'Asia', daily_interest: 0.80, total_interest: 24.0, duration: 30, min_amount: 5000, max_amount: 10000000, icon: '🇮🇳', color: 'rgba(56,189,248,0.12)' }
+  { _id: 'plan1', name: 'StableGrowth Ltd.', description: 'Invest in a diversified portfolio of blue‑chip stocks with stable returns.', raw_material: 'Stocks', category: 'stocks', daily_interest: 15, total_interest: 15*20, duration: 20, min_amount: 3000, max_amount: 50000, icon: '📈', is_popular: true, color: 'rgba(16,185,129,0.12)' },
+  { _id: 'plan2', name: 'Global Equity Fund', description: 'A mix of international stocks offering medium risk and higher returns.', raw_material: 'Stocks', category: 'stocks', daily_interest: 20, total_interest: 20*20, duration: 20, min_amount: 50000, max_amount: 500000, icon: '🌍', color: 'rgba(251,191,36,0.12)' },
+  { _id: 'plan3', name: 'HighYield Ventures', description: 'Aggressive growth stocks for maximum returns.', raw_material: 'Stocks', category: 'stocks', daily_interest: 25, total_interest: 25*20, duration: 20, min_amount: 100000, max_amount: 1000000, icon: '🚀', color: 'rgba(220,38,38,0.12)' },
+  { _id: 'plan4', name: 'Dividend Kings Inc.', description: 'Companies with a long history of consistent dividend payments.', raw_material: 'Stocks', category: 'stocks', daily_interest: 19, total_interest: 19*15, duration: 15, min_amount: 5500, max_amount: 25000, icon: '💵', color: 'rgba(139,69,19,0.12)' },
+  { _id: 'plan5', name: 'Industrial Select Fund', description: 'Focus on industrial and manufacturing sector stocks.', raw_material: 'Stocks', category: 'stocks', daily_interest: 17, total_interest: 17*15, duration: 15, min_amount: 15000, max_amount: 150000, icon: '🏭', color: 'rgba(192,192,192,0.12)' },
+  { _id: 'plan6', name: 'Sustainable Future ETF', description: 'Invest in environmentally and socially responsible companies.', raw_material: 'Stocks', category: 'stocks', daily_interest: 19, total_interest: 19*15, duration: 15, min_amount: 20000, max_amount: 200000, icon: '🌱', color: 'rgba(139,69,19,0.12)' },
+  { _id: 'plan7', name: 'Energy Sector Leaders', description: 'Top companies in the energy sector, including renewables.', raw_material: 'Stocks', category: 'stocks', daily_interest: 23, total_interest: 23*9, duration: 9, min_amount: 75000, max_amount: 750000, icon: '⚡', color: 'rgba(65,105,225,0.12)' },
+  { _id: 'plan8', name: 'Consumer Staples Fund', description: 'Stocks of essential consumer goods companies with steady demand.', raw_material: 'Stocks', category: 'stocks', daily_interest: 21, total_interest: 21*9, duration: 9, min_amount: 30000, max_amount: 300000, icon: '🛒', color: 'rgba(255,107,107,0.12)' }
 ];
 
 async function renderPlans() {
@@ -2664,7 +2766,7 @@ async function renderPlans() {
     appState.plans = (plansData.plans && plansData.plans.length) ? plansData.plans : FALLBACK_PLANS;
   } catch (err) {
     appState.plans = FALLBACK_PLANS;
-    Toast.info('Using sample plans', 'Loading global index plans');
+    Toast.info('Using sample plans', 'Loading stock investment plans');
   }
   const grid = document.getElementById('plansGrid');
   grid.innerHTML = appState.plans.map(plan => `
@@ -3564,6 +3666,56 @@ function statusBadge(status) {
     });
   }, 500);
 })();
+</script>
+
+<!-- ========== SOCKET.IO REAL-TIME ENHANCEMENTS ========== -->
+<script>
+// Real-time notifications via Socket.IO (added without altering original code)
+if (typeof io !== 'undefined') {
+  let socket = null;
+  function initSocket() {
+    const token = StateManager.load('token');
+    if (!token || !appState.currentUser) return;
+    socket = io('https://real-wealthy-1.onrender.com', {
+      auth: { token },
+      transports: ['websocket', 'polling'],
+    });
+    socket.on('connect', () => {
+      console.log('Socket connected');
+      socket.emit('join-user', appState.currentUser._id);
+      if (appState.currentUser.role === 'admin' || appState.currentUser.role === 'super_admin') {
+        socket.emit('admin-join', appState.currentUser._id);
+      }
+    });
+    socket.on('new-notification', (notif) => {
+      appState.notifications.unshift(notif);
+      renderNotifications();
+      Toast.info(notif.title, notif.message);
+    });
+    socket.on('balance-updated', (data) => {
+      if (appState.currentUser) {
+        appState.currentUser.balance = data.balance;
+        appState.currentUser.total_earnings = data.total_earnings;
+        appState.currentUser.referral_earnings = data.referral_earnings;
+        appState.currentUser.withdrawable_earnings = data.withdrawable_earnings;
+        appState.currentUser.total_withdrawn = data.total_withdrawn;
+        StateManager.save('user', appState.currentUser);
+        if (appState.currentSection === 'dashboard-section') loadDashboard();
+      }
+    });
+    socket.on('disconnect', () => console.log('Socket disconnected'));
+  }
+  // Override initApp to also initialize socket
+  const originalInitApp = initApp;
+  initApp = function() {
+    originalInitApp();
+    initSocket();
+  };
+  // If already logged in, call initSocket after app init
+  if (appState.currentUser) {
+    setTimeout(initSocket, 1000);
+  }
+}
 </script>
 </body>
 </html>
