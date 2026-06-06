@@ -22,7 +22,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5224024430002176"
      crossorigin="anonymous"></script>
   <style>
-    /* ===== LUCKY INVESTMENT — ULTRA PREMIUM REDESIGN 2025 ===== */
+    /* ===== LUCKY INVESTMENT — PRODUCTION-GRADE UI/UX 2025 ===== */
     :root {
       --primary-50: #eff6ff;
       --primary-100: #dbeafe;
@@ -119,7 +119,7 @@
     input, select, textarea { font-family: inherit; }
     img { max-width: 100%; }
     ul { list-style: none; }
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: var(--bg-card); }
     ::-webkit-scrollbar-thumb { background: var(--primary-600); border-radius: 99px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--primary-500); }
@@ -300,11 +300,11 @@
     .main-content {
       margin-left: var(--sidebar-w); padding-top: var(--navbar-h);
       min-height: 100vh; flex: 1;
-      padding: 28px 32px 32px 32px;
+      padding: 28px 32px calc(var(--bottom-h) + 32px) 32px;
     }
 
     /* SECTIONS */
-    .section { display: none; animation: fadeSlide 0.5s var(--transition-base); }
+    .section { display: none; animation: fadeSlide 0.35s ease; }
     .section.active { display: block; }
     @keyframes fadeSlide {
       from { opacity: 0; transform: translateY(20px); }
@@ -472,6 +472,9 @@
 
     /* STAT CARDS */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 28px; }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
     .stat-card {
       background: var(--bg-card); border: 1px solid var(--border-light);
       border-radius: var(--radius-lg); padding: 22px 20px;
@@ -499,6 +502,13 @@
     .stat-trend { font-size: 0.75rem; font-weight: 600; margin-top: 8px; display: flex; align-items: center; gap: 4px; }
     .stat-trend.up { color: var(--accent-emerald); }
     .stat-trend.down { color: var(--accent-rose); }
+
+    /* SKELETON */
+    .skeleton-card {
+      height: 120px; background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+      background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--radius-lg);
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
     /* BADGES */
     .badge {
@@ -841,7 +851,7 @@
     .ticker-item .chg.up { color: var(--accent-emerald); }
     .ticker-item .chg.down { color: var(--accent-rose); }
 
-    /* FILE UPLOAD (ENHANCED) */
+    /* FILE UPLOAD */
     .file-upload-area {
       background: var(--bg-card);
       border: 2px dashed var(--border-light);
@@ -942,13 +952,28 @@
     .empty-state i { font-size: 3rem; margin-bottom: 16px; opacity: 0.5; }
     .empty-state h4 { font-weight: 500; margin-bottom: 8px; }
 
+    /* PROGRESS BAR */
+    .progress-bar {
+      height: 6px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-top: 8px;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--primary-400), var(--accent-gold));
+      border-radius: 99px; transition: width 0.6s ease;
+    }
+
+    /* REGULATORY */
+    .reg-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+    .reg-badge {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm); padding: 12px 16px; flex: 1; min-width: 200px;
+    }
+    .rb-icon { font-size: 1.5rem; font-weight: 700; color: var(--primary-400); }
+    .rb-text strong { display: block; font-size: 0.85rem; }
+    .rb-text { font-size: 0.75rem; color: var(--text-muted); }
+
     /* RESPONSIVE */
-    @media (max-width: 1200px) {
-      .dash-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 1024px) {
-      .grid-2 { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
       :root { --sidebar-w: 280px; }
       .sidebar { transform: translateX(-100%); }
@@ -957,7 +982,7 @@
       .main-content { margin-left: 0; padding: 20px 16px calc(var(--bottom-h) + 16px); }
       .bottom-nav { display: block; }
       .navbar-logo span.name { display: none; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .plans-grid { grid-template-columns: 1fr; }
       .quick-actions { grid-template-columns: repeat(2, 1fr); }
       .form-row { grid-template-columns: 1fr; }
@@ -966,7 +991,7 @@
       .install-banner { bottom: 80px; }
     }
     @media (max-width: 480px) {
-      .stats-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
       .payment-methods { flex-direction: column; }
       .filter-bar { flex-direction: column; }
       .navbar-actions .currency-select { display: none; }
@@ -1316,18 +1341,18 @@
           </div>
         </div>
 
-        <!-- Stats -->
+        <!-- Stats Row 1 -->
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-icon primary"><i class="fa fa-wallet"></i></div>
             <div class="stat-value" id="statWallet">₦0.00</div>
-            <div class="stat-label">Wallet Balance</div>
+            <div class="stat-label">Deposit Balance</div>
             <div class="stat-trend up"><i class="fa fa-arrow-up"></i> Available to invest</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon emerald"><i class="fa fa-chart-bar"></i></div>
             <div class="stat-value" id="statEarnings">₦0.00</div>
-            <div class="stat-label">Total Earnings</div>
+            <div class="stat-label">Total Earnings (All Time)</div>
             <div class="stat-trend up" id="statEarningsTrend"><i class="fa fa-arrow-up"></i> +0%</div>
           </div>
           <div class="stat-card">
@@ -1340,7 +1365,55 @@
             <div class="stat-icon gold"><i class="fa fa-users"></i></div>
             <div class="stat-value" id="statReferrals">0</div>
             <div class="stat-label">Referrals</div>
-            <div class="stat-trend up"><i class="fa fa-star"></i> 20% commission</div>
+            <div class="stat-trend up"><i class="fa fa-star"></i> 20% on first investment</div>
+          </div>
+        </div>
+
+        <!-- Stats Row 2 – Financial Metrics -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon primary"><i class="fa fa-money-bill-wave"></i></div>
+            <div class="stat-value" id="totalDeposits">₦0</div>
+            <div class="stat-label">Total Deposits (Lifetime)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold"><i class="fa fa-chart-line"></i></div>
+            <div class="stat-value" id="totalInvested">₦0</div>
+            <div class="stat-label">Total Invested</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon emerald"><i class="fa fa-play-circle"></i></div>
+            <div class="stat-value" id="activeInvestmentsCount">0</div>
+            <div class="stat-label">Active Investments</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon muted"><i class="fa fa-check-circle"></i></div>
+            <div class="stat-value" id="completedInvestmentsCount">0</div>
+            <div class="stat-label">Completed Investments</div>
+          </div>
+        </div>
+
+        <!-- Stats Row 3 -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon rose"><i class="fa fa-arrow-up"></i></div>
+            <div class="stat-value" id="totalWithdrawn">₦0</div>
+            <div class="stat-label">Total Withdrawn (Lifetime)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon sky"><i class="fa fa-users"></i></div>
+            <div class="stat-value" id="referralBonusTotal">₦0</div>
+            <div class="stat-label">Referral Bonus Earned</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold"><i class="fa fa-coins"></i></div>
+            <div class="stat-value" id="investmentEarnings">₦0</div>
+            <div class="stat-label">Investment Earnings</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon primary"><i class="fa fa-chart-pie"></i></div>
+            <div class="stat-value" id="portfolioValue">₦0</div>
+            <div class="stat-label">Portfolio Value</div>
           </div>
         </div>
 
@@ -1615,13 +1688,17 @@
           <div class="grid-2">
             <div class="card">
               <div class="card-title mb-16">Withdrawal Request</div>
+              <div class="alert alert-warning" style="background:rgba(251,191,36,0.1); border-left:3px solid #fbbf24; padding:12px; margin-bottom:16px">
+                <i class="fa fa-clock"></i> <strong>Admin Approval Required</strong><br>
+                Withdrawals are processed within 1–3 business days after admin review.
+              </div>
               <div class="form-group">
                 <label class="form-label">Amount (₦)</label>
                 <div class="input-icon-wrap">
                   <i class="icon fa fa-naira-sign"></i>
                   <input type="number" class="form-input" id="withdrawAmount" placeholder="Min. ₦4,000" min="4000" oninput="calcWithdrawalFee()" />
                 </div>
-                <div class="form-hint">Minimum withdrawal: ₦4,000</div>
+                <div class="form-hint">Minimum withdrawal: ₦4,000. You can only withdraw earnings, not your deposit balance.</div>
               </div>
               <div class="summary-box" id="withdrawSummary" style="display:none">
                 <div class="summary-row"><span class="label">Requested Amount</span><span class="value font-mono" id="wAmtReq">₦0</span></div>
@@ -1654,7 +1731,7 @@
                 <div class="stat-card emerald mb-12">
                   <div class="stat-icon emerald"><i class="fa fa-money-bill-wave"></i></div>
                   <div class="stat-value" id="withdrawableBalance">₦0.00</div>
-                  <div class="stat-label">Withdrawable Balance</div>
+                  <div class="stat-label">Available Earnings</div>
                 </div>
                 <div class="info-row"><span class="key">Total Withdrawn</span><span class="val font-mono" id="totalWithdrawn">₦0</span></div>
                 <div class="info-row"><span class="key">Pending</span><span class="val" id="withPending">0</span></div>
@@ -1853,7 +1930,7 @@
         <div class="breadcrumb"><i class="fa fa-home"></i><span class="sep">/</span><span>Referrals</span></div>
         <div class="section-header">
           <h1>Referral Program</h1>
-          <p>Earn 20% commission on every investment your referrals make</p>
+          <p>Earn 20% commission on your referral’s FIRST investment</p>
         </div>
 
         <div class="stats-grid">
@@ -1870,7 +1947,7 @@
           <div class="stat-card sky">
             <div class="stat-icon sky"><i class="fa fa-percent"></i></div>
             <div class="stat-value">20%</div>
-            <div class="stat-label">Commission Rate</div>
+            <div class="stat-label">Commission Rate (First Investment)</div>
           </div>
         </div>
 
@@ -1908,7 +1985,7 @@
               </div>
               <div class="activity-item">
                 <div class="activity-icon" style="background:rgba(59,130,246,0.1); color:var(--primary-400); font-weight:700; font-family:var(--font-mono)">3</div>
-                <div class="activity-info"><div class="activity-title fw-600">You earn 20% commission</div><div class="activity-time">Credited to your wallet instantly</div></div>
+                <div class="activity-info"><div class="activity-title fw-600">You earn 20% on their first investment</div><div class="activity-time">Credited to your wallet instantly</div></div>
               </div>
             </div>
           </div>
@@ -2300,22 +2377,16 @@
 
 </div><!-- /#app -->
 
-<!-- ========== ORIGINAL SCRIPT (PRESERVED) WITH UPDATED FALLBACK PLANS ========== -->
+<!-- ========== FULL ENHANCED SCRIPTS ========== -->
 <script>
-/* ===== LUCKY INVESTMENT — BACKEND INTEGRATION (UNCHANGED FUNCTIONALITY) ===== */
-/* The entire original JavaScript block from the user's code is preserved below.
-   Only the visual design (CSS) and some HTML structure (class additions) have been upgraded.
-   Added fallback for 8 stock investment plans in renderPlans(). */
-/* ─── CONSTANTS ─── */
+/* ===== LUCKY INVESTMENT — PRODUCTION-GRADE FRONTEND LOGIC ===== */
 const APP_NAME = 'Lucky Investment';
 const BRAND_PREFIX = 'luckyinv_';
 const API_URL = 'https://real-wealthy-1-1.onrender.com/api';
 
-/* ─── CURRENCY RATES (vs NGN) ─── */
 const CURRENCY_RATES = {NGN:1,USD:0.00065,EUR:0.00060,GBP:0.00052,GHS:0.0087,KES:0.085,ZAR:0.012};
 const CURRENCY_SYMBOLS = {NGN:'₦',USD:'$',EUR:'€',GBP:'£',GHS:'₵',KES:'KSh ',ZAR:'R '};
 
-/* ─── APP STATE ─── */
 let appState = {
   currentUser: null,
   currentSection: 'login-section',
@@ -2333,7 +2404,6 @@ let appState = {
   plans: [],
 };
 
-/* ─── STATE MANAGER ─── */
 const StateManager = {
   save(key, data) { try { localStorage.setItem(BRAND_PREFIX + key, JSON.stringify(data)); } catch(e) {} },
   load(key, def = null) { try { const d = localStorage.getItem(BRAND_PREFIX + key); return d ? JSON.parse(d) : def; } catch(e) { return def; } },
@@ -2341,7 +2411,6 @@ const StateManager = {
   clear() { try { Object.keys(localStorage).forEach(k => { if(k.startsWith(BRAND_PREFIX)) localStorage.removeItem(k); }); } catch(e) {} }
 };
 
-/* ─── CURRENCY MANAGER ─── */
 const CurrencyManager = {
   current: 'NGN',
   format(amount, currency = null) {
@@ -2362,15 +2431,14 @@ const CurrencyManager = {
   }
 };
 
-/* ─── API SERVICE (Real Backend Calls) ─── */
 const ApiService = {
   async request(endpoint, opts = {}) {
     const token = StateManager.load('token');
     const headers = {
-      'Content-Type': 'application/json',
       ...(token && { 'Authorization': `Bearer ${token}` }),
       ...opts.headers,
     };
+    if (!opts.isFormData) headers['Content-Type'] = 'application/json';
     const url = `${API_URL}${endpoint}`;
     try {
       const res = await fetch(url, { ...opts, headers });
@@ -2388,17 +2456,15 @@ const ApiService = {
   },
   async get(endpoint) { return this.request(endpoint, { method: 'GET' }); },
   async post(endpoint, body, isFormData = false) {
-    const headers = isFormData ? {} : { 'Content-Type': 'application/json' };
     const token = StateManager.load('token');
-    if (token) headers['Authorization'] = `Bearer ${token}`;
-    const fetchOpts = { method: 'POST', headers, body: isFormData ? body : JSON.stringify(body) };
+    const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+    const fetchOpts = { method: 'POST', headers, body: isFormData ? body : JSON.stringify(body), isFormData };
     return this.request(endpoint, fetchOpts);
   },
   async put(endpoint, body) { return this.request(endpoint, { method: 'PUT', body: JSON.stringify(body) }); },
   async upload(endpoint, formData) { return this.post(endpoint, formData, true); },
 };
 
-/* ─── TOAST SERVICE ─── */
 const Toast = {
   show(type, title, msg, dur = 4000) {
     const icons = {success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle',info:'fa-info-circle'};
@@ -2425,22 +2491,18 @@ const Toast = {
   info(t, m) { return this.show('info', t, m); },
 };
 
-/* ─── LOADER ─── */
-function showLoader(text = 'Processing...') {
-  document.getElementById('loaderText').textContent = text;
-  document.getElementById('loaderOverlay').classList.add('show');
-}
+function showLoader(text = 'Processing...') { document.getElementById('loaderText').textContent = text; document.getElementById('loaderOverlay').classList.add('show'); }
 function hideLoader() { document.getElementById('loaderOverlay').classList.remove('show'); }
 
-/* ─── NAVIGATION ─── */
 function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => { s.classList.remove('active'); s.style.opacity = '0'; });
   const target = document.getElementById(id);
-  if(target) target.classList.add('active');
+  if(target) { target.classList.add('active'); target.style.opacity = '1'; }
   appState.currentSection = id;
   StateManager.save('lastSection', id);
   window.location.hash = id;
 }
+
 function navigateTo(id) {
   if(!appState.currentUser) return;
   showSection(id);
@@ -2448,11 +2510,13 @@ function navigateTo(id) {
   closeSidebar();
   loadSectionData(id);
 }
+
 function updateNavActive(id) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.bnav-item').forEach(n => n.classList.remove('active'));
   document.querySelectorAll(`[data-section="${id}"]`).forEach(n => n.classList.add('active'));
 }
+
 function loadSectionData(id) {
   switch(id) {
     case 'dashboard-section': loadDashboard(); break;
@@ -2487,11 +2551,13 @@ async function handleLogin() {
     hideLoader();
   }
 }
+
 async function loginAsDemo() {
   document.getElementById('loginEmail').value = 'investor@demo.com';
   document.getElementById('loginPassword').value = 'Demo123456';
   await handleLogin();
 }
+
 async function handleRegister() {
   const fn = document.getElementById('regFirstName').value.trim();
   const ln = document.getElementById('regLastName').value.trim();
@@ -2523,15 +2589,18 @@ async function handleRegister() {
     hideLoader();
   }
 }
+
 function handleLogout() {
   StateManager.remove('token');
   StateManager.remove('user');
   appState.currentUser = null;
+  appState.investments = []; appState.deposits = []; appState.withdrawals = []; appState.transactions = []; appState.notifications = []; appState.referrals = []; appState.tickets = [];
   document.getElementById('appLayout').style.display = 'none';
   document.getElementById('bottomNav').style.display = 'none';
   showSection('login-section');
   Toast.info('Signed out','You have been logged out successfully.');
 }
+
 async function forgotPassword() {
   const email = prompt('Enter your email address:');
   if (!email) return;
@@ -2573,6 +2642,7 @@ async function initApp() {
   }
   document.getElementById('navTicker').style.display = '';
 }
+
 function updateUserUI() {
   const u = appState.currentUser;
   if(!u) return;
@@ -2592,18 +2662,29 @@ async function loadDashboard() {
     appState.currentUser = profileData.user;
     StateManager.save('user', appState.currentUser);
   } catch (err) { console.warn('Failed to refresh profile'); }
-  const portfolio = (u.balance || 0) + (u.total_earnings || 0) + (u.referral_earnings || 0) - (u.total_withdrawn || 0);
+  const portfolio = (u.balance || 0) + (u.total_earnings || 0) + (u.referral_earnings || 0);
   document.getElementById('dashBalance').textContent = CurrencyManager.formatFull(portfolio);
-  document.getElementById('dashBalanceSub').textContent = `Wallet: ${CurrencyManager.format(u.balance)} · Earnings: ${CurrencyManager.format((u.total_earnings||0)+(u.referral_earnings||0))}`;
+  document.getElementById('dashBalanceSub').textContent = `Deposit Balance: ${CurrencyManager.format(u.balance)} · Earnings: ${CurrencyManager.format((u.total_earnings||0)+(u.referral_earnings||0))}`;
   document.getElementById('statWallet').textContent = CurrencyManager.format(u.balance);
   document.getElementById('statEarnings').textContent = CurrencyManager.format((u.total_earnings||0)+(u.referral_earnings||0));
   document.getElementById('statReferrals').textContent = u.referral_count || 0;
+  document.getElementById('totalDeposits').textContent = CurrencyManager.format(u.total_deposits || 0);
+  document.getElementById('totalInvested').textContent = CurrencyManager.format(u.total_investments || 0);
+  document.getElementById('totalWithdrawn').textContent = CurrencyManager.format(u.total_withdrawn || 0);
+  document.getElementById('referralBonusTotal').textContent = CurrencyManager.format(u.referral_earnings || 0);
+  document.getElementById('investmentEarnings').textContent = CurrencyManager.format(u.total_earnings || 0);
+  document.getElementById('portfolioValue').textContent = CurrencyManager.format(portfolio);
+
   try {
     const invData = await ApiService.get('/investments');
     appState.investments = invData.investments || [];
   } catch (err) { appState.investments = []; }
   const active = appState.investments.filter(i => i.status === 'active');
+  const completed = appState.investments.filter(i => i.status === 'completed');
   document.getElementById('statActiveInv').textContent = active.length;
+  document.getElementById('activeInvestmentsCount').textContent = active.length;
+  document.getElementById('completedInvestmentsCount').textContent = completed.length;
+
   const dashInvEl = document.getElementById('dashActiveInvestments');
   if (active.length === 0) {
     dashInvEl.innerHTML = `<div class="empty-state"><i class="fa fa-chart-area"></i><h4>No active investments</h4><p>Start investing to grow your wealth</p></div>`;
@@ -2633,7 +2714,43 @@ async function loadDashboard() {
   } catch (err) { appState.notifications = []; }
   renderNotifications();
   setTimeout(() => loadPerformanceChart('30d'), 200);
+  animateNumbers();
 }
+
+function animateNumbers() {
+  const els = [
+    { id: 'dashBalance', format: v => CurrencyManager.formatFull(v) },
+    { id: 'statWallet', format: v => CurrencyManager.format(v) },
+    { id: 'statEarnings', format: v => CurrencyManager.format(v) },
+    { id: 'totalDeposits', format: v => CurrencyManager.format(v) },
+    { id: 'totalInvested', format: v => CurrencyManager.format(v) },
+    { id: 'totalWithdrawn', format: v => CurrencyManager.format(v) },
+    { id: 'referralBonusTotal', format: v => CurrencyManager.format(v) },
+    { id: 'investmentEarnings', format: v => CurrencyManager.format(v) },
+    { id: 'portfolioValue', format: v => CurrencyManager.format(v) },
+  ];
+  els.forEach(({id, format}) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const finalText = el.textContent;
+    const numeric = parseFloat(finalText.replace(/[^0-9.]/g, ''));
+    if (isNaN(numeric)) return;
+    animateValue(el, 0, numeric, 600, format);
+  });
+}
+
+function animateValue(element, start, end, duration, format) {
+  const startTime = performance.now();
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const value = start + (end - start) * progress;
+    element.textContent = format(value);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
 function renderRecentActivity() {
   const el = document.getElementById('recentActivity');
   const txIcons = {deposit:'fa-arrow-down text-emerald',withdrawal:'fa-arrow-up text-rose',investment:'fa-chart-line text-primary',daily_interest:'fa-coins text-gold',referral_bonus:'fa-users text-sky',bonus:'fa-gift text-amber',fee:'fa-percent text-muted'};
@@ -2654,6 +2771,7 @@ function renderRecentActivity() {
       </div>
     </div>`).join('');
 }
+
 function renderNotifications() {
   const unread = appState.notifications.filter(n => !n.is_read);
   const count = unread.length;
@@ -2687,6 +2805,7 @@ function renderNotifications() {
       ${!n.is_read ? '<div style="width:6px;height:6px;border-radius:50%;background:var(--primary-400);flex-shrink:0"></div>' : ''}
     </div>`).join('') || `<div class="empty-state" style="padding:16px"><i class="fa fa-bell-slash"></i><h4>No notifications</h4></div>`;
 }
+
 async function markRead(id) {
   try {
     await ApiService.post(`/notifications/${id}/read`, {});
@@ -2695,6 +2814,7 @@ async function markRead(id) {
     renderNotifications();
   } catch (err) { Toast.error('Failed to mark as read', err.message); }
 }
+
 async function markAllRead() {
   try {
     await ApiService.post('/notifications/read-all', {});
@@ -2750,7 +2870,6 @@ async function loadInvestments() {
   renderMyInvestments();
 }
 
-/* 8 STOCK INVESTMENT PLANS (matching backend) */
 const FALLBACK_PLANS = [
   { _id: 'plan1', name: 'StableGrowth Ltd.', description: 'Invest in a diversified portfolio of blue‑chip stocks with stable returns.', raw_material: 'Stocks', category: 'stocks', daily_interest: 15, total_interest: 15*20, duration: 20, min_amount: 3000, max_amount: 50000, icon: '📈', is_popular: true, color: 'rgba(16,185,129,0.12)' },
   { _id: 'plan2', name: 'Global Equity Fund', description: 'A mix of international stocks offering medium risk and higher returns.', raw_material: 'Stocks', category: 'stocks', daily_interest: 20, total_interest: 20*20, duration: 20, min_amount: 50000, max_amount: 500000, icon: '🌍', color: 'rgba(251,191,36,0.12)' },
@@ -2787,7 +2906,6 @@ async function renderPlans() {
       <div class="text-xs text-muted mb-4">${plan.total_interest}% total over ${plan.duration} days</div>
       <div class="plan-features">
         <div class="plan-feature"><i class="fa fa-check"></i> Daily compounding returns</div>
-        <div class="plan-feature"><i class="fa fa-check"></i> Auto-renew option</div>
         <div class="plan-feature"><i class="fa fa-check"></i> ${plan.duration}-day investment cycle</div>
         <div class="plan-feature"><i class="fa fa-check"></i> Instant activation</div>
       </div>
@@ -2802,6 +2920,7 @@ async function renderPlans() {
       </div>
     </div>`).join('');
 }
+
 function renderMyInvestments() {
   const inv = appState.investments;
   document.getElementById('myInvActive').textContent = inv.filter(i=>i.status==='active').length;
@@ -2826,6 +2945,7 @@ function renderMyInvestments() {
     </tr>`;
   }).join('');
 }
+
 function switchInvTab(tab, btn) {
   document.querySelectorAll('#investments-section .tabs .tab-btn').forEach(b => b.classList.remove('active'));
   if(btn) btn.classList.add('active');
@@ -2833,7 +2953,7 @@ function switchInvTab(tab, btn) {
   document.getElementById('invTabMy').style.display = tab === 'my' ? '' : 'none';
 }
 
-/* ─── INVEST MODAL ─── */
+/* ─── INVEST MODAL (WALLET ONLY) ─── */
 let selectedPlanForInvest = null, investDebounceTimer = null;
 function openInvestModal(planId) {
   const plan = appState.plans.find(p => p._id === planId);
@@ -2856,28 +2976,9 @@ function openInvestModal(planId) {
       </div>
       <div class="form-error" id="investAmtErr">Minimum investment is ${CurrencyManager.format(plan.min_amount)}</div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Payment Method</label>
-      <div class="payment-methods">
-        <div class="pay-method selected" onclick="selectPayMethod(this,'wallet')"><i class="fa fa-wallet"></i><span>Wallet</span></div>
-        <div class="pay-method" onclick="selectPayMethod(this,'bank_transfer')"><i class="fa fa-building-columns"></i><span>Bank</span></div>
-        <div class="pay-method" onclick="selectPayMethod(this,'crypto')"><i class="fa fa-bitcoin-sign"></i><span>Crypto</span></div>
-      </div>
+    <div class="payment-methods">
+      <div class="pay-method selected" data-method="wallet"><i class="fa fa-wallet"></i><span>Wallet Balance</span></div>
     </div>
-    <div id="investProofSection" style="display:none">
-      <div class="form-group">
-        <label class="form-label">Upload Payment Proof</label>
-        <div class="file-upload-area"><input type="file" id="investProofFile" accept="image/*" onchange="handleFileUpload(this,'investProofPreview',null)"/>
-          <div class="file-upload-icon"><i class="fa fa-cloud-upload-alt"></i></div>
-          <div class="file-upload-text">Upload proof</div>
-        </div>
-        <div id="investProofPreview"></div>
-      </div>
-    </div>
-    <label class="form-check mb-12">
-      <input type="checkbox" id="investAutoRenew"/>
-      <span>Auto-renew after cycle completes</span>
-    </label>
     <div class="summary-box" id="investSummary" style="display:none">
       <div class="summary-row"><span class="label">Principal</span><span class="value font-mono" id="sumPrincipal">₦0</span></div>
       <div class="summary-row"><span class="label">Daily Return</span><span class="value text-primary font-mono" id="sumDaily">₦0/day</span></div>
@@ -2887,6 +2988,7 @@ function openInvestModal(planId) {
     </div>`;
   openModal('investmentModal');
 }
+
 function updateInvestSummary() {
   clearTimeout(investDebounceTimer);
   investDebounceTimer = setTimeout(() => {
@@ -2911,33 +3013,18 @@ function updateInvestSummary() {
     setText('sumMaturity', maturity.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}));
   }, 300);
 }
-function selectPayMethod(el, method) {
-  el.closest('.payment-methods').querySelectorAll('.pay-method').forEach(m => m.classList.remove('selected'));
-  el.classList.add('selected');
-  el.closest('.payment-methods').dataset.selected = method;
-  const proofSection = document.getElementById('investProofSection');
-  if(proofSection) proofSection.style.display = (method === 'bank_transfer' || method === 'crypto') ? '' : 'none';
-}
+
 async function submitInvestment() {
   if(!selectedPlanForInvest) return;
   const amt = parseFloat(document.getElementById('investAmount')?.value);
   const plan = selectedPlanForInvest;
   if(!amt || amt < plan.min_amount) return Toast.warning('Invalid Amount', `Minimum is ${CurrencyManager.format(plan.min_amount)}`);
   const user = appState.currentUser;
-  if(user.balance < amt) return Toast.error('Insufficient Balance', 'Please deposit funds first.');
+  if(user.balance < amt) return Toast.error('Insufficient Deposit Balance', 'Please deposit funds first.');
   closeModal('investmentModal');
   showLoader('Processing investment...');
   try {
-    const formData = new FormData();
-    formData.append('plan_id', plan._id);
-    formData.append('amount', amt);
-    formData.append('auto_renew', document.getElementById('investAutoRenew')?.checked || false);
-    const paymentMethod = document.querySelector('#investModalBody .payment-methods')?.dataset.selected;
-    if (paymentMethod === 'bank_transfer' || paymentMethod === 'crypto') {
-      const fileInput = document.getElementById('investProofFile');
-      if (fileInput && fileInput.files[0]) formData.append('payment_proof', fileInput.files[0]);
-    }
-    const data = await ApiService.upload('/investments', formData);
+    const data = await ApiService.post('/investments', { plan_id: plan._id, amount: amt });
     user.balance -= amt;
     StateManager.save('user', user);
     appState.investments.unshift(data.investment);
@@ -3054,7 +3141,7 @@ function renderWithdrawalHistory() {
       <td class="td-mono text-rose">-${CurrencyManager.format(fee)}</td>
       <td class="td-mono text-emerald">${CurrencyManager.format(net)}</td>
       <td class="text-sm">${formatDate(w.createdAt)}</td>
-      <td>${statusBadge(w.status)}</td>
+      <td>${statusBadge(w.status)} <small class="text-muted">(Admin approval required)</small></td>
     </tr>`;
   }).join('');
 }
@@ -3074,7 +3161,7 @@ async function submitWithdrawal() {
   if(!amt || amt < 4000) return Toast.warning('Invalid Amount', `Minimum withdrawal is ₦4,000`);
   const u = appState.currentUser;
   const withdrawable = u.withdrawable_earnings || 0;
-  if(amt > withdrawable) return Toast.error('Insufficient Balance', `Available: ${CurrencyManager.format(withdrawable)}`);
+  if(amt > withdrawable) return Toast.error('Insufficient Available Earnings', `Available: ${CurrencyManager.format(withdrawable)}. You can only withdraw earnings, not deposit balance.`);
   if(!u.kyc_verified) return Toast.warning('KYC Required', 'Please complete KYC verification first.');
   const method = document.getElementById('withdrawMethod').value;
   showLoader('Processing withdrawal...');
@@ -3083,7 +3170,7 @@ async function submitWithdrawal() {
     appState.withdrawals.unshift(data.withdrawal);
     document.getElementById('withdrawAmount').value = '';
     document.getElementById('withdrawSummary').style.display = 'none';
-    Toast.success('Withdrawal Requested!', `Your request for ${CurrencyManager.format(amt)} is being processed.`);
+    Toast.success('Withdrawal Requested!', `Your request for ${CurrencyManager.format(amt)} is being processed. Admin approval required.`);
     switchWithTab('history', null);
     renderWithdrawalHistory();
   } catch (err) {
@@ -3183,7 +3270,6 @@ async function submitKYC() {
   const dob = document.getElementById('kycDob').value;
   const nationality = document.getElementById('kycNationality').value;
   const idType = document.getElementById('kycIdType').value;
-  const idNumber = 'N/A';
   const idFront = document.getElementById('kycIdFront').files[0];
   const selfie = document.getElementById('kycSelfie').files[0];
   const addressProof = document.getElementById('kycAddressProof').files[0];
@@ -3195,7 +3281,7 @@ async function submitKYC() {
     const formData = new FormData();
     formData.append('full_name', name);
     formData.append('id_type', idType);
-    formData.append('id_number', idNumber);
+    formData.append('id_number', 'N/A');
     formData.append('id_front', idFront);
     if (document.getElementById('kycIdBack').files[0]) formData.append('id_back', document.getElementById('kycIdBack').files[0]);
     formData.append('selfie_with_id', selfie);
@@ -3238,7 +3324,7 @@ async function loadReferrals() {
 function copyRefLink() { const link = document.getElementById('refLink').textContent; copyText(link, 'Referral link copied!'); }
 function shareReferral(platform) {
   const link = document.getElementById('refLink').textContent;
-  const msg = `Join Lucky Investment and start earning daily returns on global stocks! Use my referral link: ${link}`;
+  const msg = `Join Lucky Investment and earn daily returns on global stocks! Use my referral link – you get 20% commission on your first investment: ${link}`;
   const urls = {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(msg)}`,
     telegram: `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Join Lucky Investment!')}`,
@@ -3641,7 +3727,8 @@ function statusBadge(status) {
 
 /* ─── APP BOOT ─── */
 (function init() {
-  const savedTheme = StateManager.load('theme', 'dark');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const savedTheme = StateManager.load('theme', prefersDark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', savedTheme);
   appState.theme = savedTheme;
   const themeBtn = document.getElementById('themeBtn');
@@ -3672,7 +3759,6 @@ function statusBadge(status) {
 
 <!-- ========== SOCKET.IO REAL-TIME ENHANCEMENTS ========== -->
 <script>
-// Real-time notifications via Socket.IO (added without altering original code)
 if (typeof io !== 'undefined') {
   let socket = null;
   function initSocket() {
@@ -3701,19 +3787,27 @@ if (typeof io !== 'undefined') {
         appState.currentUser.referral_earnings = data.referral_earnings;
         appState.currentUser.withdrawable_earnings = data.withdrawable_earnings;
         appState.currentUser.total_withdrawn = data.total_withdrawn;
+        appState.currentUser.total_deposits = data.total_deposits;
         StateManager.save('user', appState.currentUser);
-        if (appState.currentSection === 'dashboard-section') loadDashboard();
+        // Direct DOM updates for real-time feel
+        document.getElementById('dashBalance').textContent = CurrencyManager.formatFull(data.balance + data.total_earnings + data.referral_earnings);
+        document.getElementById('statWallet').textContent = CurrencyManager.format(data.balance);
+        document.getElementById('statEarnings').textContent = CurrencyManager.format(data.total_earnings + data.referral_earnings);
+        document.getElementById('totalDeposits').textContent = CurrencyManager.format(data.total_deposits);
+        document.getElementById('totalWithdrawn').textContent = CurrencyManager.format(data.total_withdrawn);
+        document.getElementById('referralBonusTotal').textContent = CurrencyManager.format(data.referral_earnings);
+        document.getElementById('investmentEarnings').textContent = CurrencyManager.format(data.total_earnings);
+        document.getElementById('withdrawableBalance').textContent = CurrencyManager.format(data.withdrawable_earnings);
+        document.getElementById('portfolioValue').textContent = CurrencyManager.format(data.balance + data.total_earnings + data.referral_earnings);
       }
     });
     socket.on('disconnect', () => console.log('Socket disconnected'));
   }
-  // Override initApp to also initialize socket
   const originalInitApp = initApp;
   initApp = function() {
     originalInitApp();
     initSocket();
   };
-  // If already logged in, call initSocket after app init
   if (appState.currentUser) {
     setTimeout(initSocket, 1000);
   }
