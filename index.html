@@ -498,6 +498,22 @@
             padding: 2px 7px;
             border-radius: 99px;
         }
+        .nav-item.logout-item {
+            color: var(--accent-rose);
+            margin-top: 8px;
+            border-top: 1px solid var(--border-light);
+            padding-top: 16px;
+            border-radius: 0;
+            border-left: none;
+        }
+        .nav-item.logout-item:hover {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--accent-rose);
+        }
+        .nav-item.logout-item .nav-icon {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--accent-rose);
+        }
         .sidebar-bottom {
             margin-top: auto;
             padding-top: 18px;
@@ -542,32 +558,6 @@
         .sidebar-user-card .urole {
             font-size: 0.68rem;
             color: var(--text-muted);
-        }
-        .sidebar-logout-btn {
-            width: 100%;
-            background: rgba(244, 63, 94, 0.1);
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            border-radius: 11px;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: var(--accent-rose);
-            font-size: 0.88rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-base);
-            min-height: 48px;
-            margin-top: 8px;
-        }
-        .sidebar-logout-btn:hover {
-            background: rgba(244, 63, 94, 0.2);
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
-            transform: translateY(-1px);
-        }
-        .sidebar-logout-btn i {
-            font-size: 1rem;
         }
         .sidebar-overlay {
             display: block;
@@ -2771,13 +2761,13 @@
                     <div class="nav-item" onclick="navigateTo('reports-section')" data-section="reports-section"><div class="nav-icon"><i class="fa fa-flag"></i></div> Reports</div>
                     <div class="nav-item" onclick="navigateTo('profile-section')" data-section="profile-section"><div class="nav-icon"><i class="fa fa-user-cog"></i></div> Profile</div>
                     <div class="nav-item" id="adminNavItem" style="display:none" onclick="navigateTo('admin-section')" data-section="admin-section"><div class="nav-icon"><i class="fa fa-shield-alt"></i></div> Admin Panel<span class="nav-badge">4</span></div>
+                    <div class="nav-item logout-item" onclick="handleLogout()"><div class="nav-icon"><i class="fa fa-sign-out-alt"></i></div> Logout</div>
                 </div>
                 <div class="sidebar-bottom">
                     <div class="sidebar-user-card">
                         <div class="avatar" id="sidebarAvatar">LI</div>
                         <div class="uinfo"><div class="uname" id="sidebarName">Loading...</div><div class="urole" id="sidebarRole">Member</div></div>
                     </div>
-                    <button class="sidebar-logout-btn" onclick="handleLogout()"><i class="fa fa-sign-out-alt"></i> Logout</button>
                 </div>
             </aside>
             <main class="main-content" id="mainContent">
@@ -2967,17 +2957,19 @@
         const ApiService = { async request(endpoint, opts = {}) { const token = StateManager.load('token'); const headers = { ...
                     (token && { 'Authorization': `Bearer ${token}` }), ...opts.headers }; const url =
                     `${API_URL}${endpoint}`; try { const res = await fetch(url, { ...opts, headers }); if (!res
-                    .ok) { const errorData = await res.json().catch(() => ({})); throw new Error(errorData
-                        .message || `HTTP ${res.status}`); } const json = await res.json(); if (!json.success)
-                    throw new Error(json.message); return json.data; } catch (error) { console.error(
-                    'API Error:', error); throw error; } }, async get(endpoint) { return this.request(endpoint, { method: 'GET' }); },
-            async post(endpoint, body, isFormData = false) { const headers = isFormData ? {} : { 'Content-Type': 'application/json' };
-                const token = StateManager.load('token'); if (token) headers['Authorization'] =
-                `Bearer ${token}`; const fetchOpts = { method: 'POST', headers, body: isFormData ? body : JSON.stringify(
-                        body) }; return this.request(endpoint, fetchOpts); }, async put(endpoint, body) { return this.request(
-                    endpoint, { method: 'PUT', body: JSON.stringify(body) }); }, async upload(endpoint, formData) { const token =
-                    StateManager.load('token'); const headers = token ? { 'Authorization': `Bearer ${token}` } :
-                {}; return this.request(endpoint, { method: 'POST', headers, body: formData }); }, };
+                    .ok) { const errorData = await res.json().catch(() => ({})); if (res.status === 401 && errorData
+                        .message === 'Invalid token') { Toast.error('Session Expired', 'Please log in again.');
+                        handleLogout(); throw new Error('Session expired'); } throw new Error(errorData.message ||
+                        `HTTP ${res.status}`); } const json = await res.json(); if (!json.success) throw new Error(json
+                    .message); return json.data; } catch (error) { console.error('API Error:', error); throw error; } },
+            async get(endpoint) { return this.request(endpoint, { method: 'GET' }); }, async post(endpoint, body,
+                isFormData = false) { const headers = isFormData ? {} : { 'Content-Type': 'application/json' }; const token =
+                    StateManager.load('token'); if (token) headers['Authorization'] = `Bearer ${token}`; const fetchOpts = { method: 'POST',
+                    headers, body: isFormData ? body : JSON.stringify(body) }; return this.request(endpoint, fetchOpts); },
+            async put(endpoint, body) { return this.request(endpoint, { method: 'PUT', body: JSON.stringify(body) }); },
+            async upload(endpoint, formData) { const token = StateManager.load('token'); const headers = {}; if (token) { headers[
+                        'Authorization'] = `Bearer ${token}`; } return this.request(endpoint, { method: 'POST',
+                    headers, body: formData }); }, };
         const Toast = { show(type, title, msg, dur = 4000) { const icons = { success: 'fa-check-circle', error: 'fa-times-circle',
                     warning: 'fa-exclamation-triangle', info: 'fa-info-circle' }; const el = document
                     .createElement('div');
@@ -3009,8 +3001,8 @@
             closeSidebar();
             loadSectionData(id); }
 
-        function updateNavActive(id) { document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.querySelectorAll('.bnav-item').forEach(n => n.classList.remove('active'));
+        function updateNavActive(id) { document.querySelectorAll('.nav-item:not(.logout-item)').forEach(n => n.classList
+                .remove('active')); document.querySelectorAll('.bnav-item').forEach(n => n.classList.remove('active'));
             document.querySelectorAll(`[data-section="${id}"]`).forEach(n => n.classList.add('active')); }
 
         function loadSectionData(id) { switch (id) { case 'dashboard-section':
@@ -3068,6 +3060,7 @@
             document.getElementById('appLayout').style.display = 'none';
             document.getElementById('bottomNav').style.display = 'flex';
             showSection('login-section');
+            closeSidebar();
             Toast.info('Signed out', 'You have been logged out successfully.'); }
         async function forgotPassword() { const email = prompt('Enter your email address:'); if (!email) return;
             showLoader('Sending reset link...'); try { await ApiService.post('/auth/forgot-password', { email });
@@ -3230,10 +3223,14 @@
                 name: 'Consumer Staples Fund', description: 'Essential consumer goods.', raw_material: 'Stocks',
                 category: 'stocks', daily_interest: 21, total_interest: 21 * 9, duration: 9, min_amount: 30000,
                 max_amount: 300000, icon: '🛒', color: 'rgba(255,107,107,0.12)' } ];
-        async function renderPlans() { try { const plansData = await ApiService.get('/plans');
-                appState.plans = (plansData.plans && plansData.plans.length) ? plansData.plans : FALLBACK_PLANS; } catch (
-            err) { appState.plans = FALLBACK_PLANS;
-                Toast.info('Using sample plans', 'Loading stock investment plans'); } const grid = document.getElementById(
+        async function renderPlans() { try { const plansData = await ApiService.get('/plans'); if (plansData.plans &&
+                    plansData.plans.length) { appState.plans = plansData.plans; } else { console.warn(
+                        'No plans from API, using fallback');
+                    appState.plans = FALLBACK_PLANS;
+                    Toast.info('Using sample plans', 'Loading stock investment plans'); } } catch (err) { console.error(
+                    'Failed to fetch plans:', err);
+                appState.plans = FALLBACK_PLANS;
+                Toast.info('Using sample plans', 'Could not fetch live plans'); } const grid = document.getElementById(
                 'plansGrid');
             grid.innerHTML = appState.plans.map(plan => `
 <div class="plan-card ${plan.is_popular?'popular':''}">${plan.is_popular?'<div class="popular-tag">⭐ Popular</div>':''}<div class="plan-icon" style="background:${plan.color||'rgba(59,130,246,0.12)'}"><span style="font-size:1.4rem">${plan.icon||'📈'}</span></div><div class="plan-name">${plan.name}</div><div style="display:flex;align-items:center;gap:5px;margin-bottom:6px"><span class="badge badge-primary" style="font-size:0.62rem">${plan.raw_material}</span><span class="badge badge-muted" style="font-size:0.62rem">${plan.category}</span></div><div class="plan-desc">${plan.description}</div><div class="plan-rate">${plan.daily_interest}<span>% / day</span></div><div class="text-xs text-muted mb-4">${plan.total_interest}% total over ${plan.duration} days</div><div class="plan-features"><div class="plan-feature"><i class="fa fa-check"></i> Daily compounding returns</div><div class="plan-feature"><i class="fa fa-check"></i> ${plan.duration}-day cycle</div><div class="plan-feature"><i class="fa fa-check"></i> Instant activation</div></div><div class="plan-footer"><div class="plan-range">Min: <strong>${CurrencyManager.format(plan.min_amount)}</strong>${plan.max_amount?` · Max: <strong>${CurrencyManager.format(plan.max_amount)}</strong>`:' · No max'}</div><button class="btn btn-primary btn-sm" onclick="openInvestModal('${plan._id}')"><i class="fa fa-bolt"></i> Invest</button></div></div>`)
@@ -3284,10 +3281,12 @@
                 setText('sumMaturity', maturity.toLocaleDateString('en-GB', { day: 'numeric', month: 'short',
                     year: 'numeric' })); }, 300); }
         async function submitInvestment() { if (!selectedPlanForInvest) return; const amt = parseFloat(document.getElementById(
-                'investAmount')?.value); const plan = selectedPlanForInvest; if (!amt || amt < plan.min_amount)
-            return Toast.warning('Invalid Amount', `Minimum is ${CurrencyManager.format(plan.min_amount)}`); const
-            user = appState.currentUser; if (user.balance < amt) return Toast.error('Insufficient Deposit Balance',
-                'Please deposit funds first.');
+                'investAmount')?.value); const plan = selectedPlanForInvest; if (isNaN(amt) || amt < plan.min_amount) {
+                return Toast.warning('Invalid Amount', `Minimum investment is ${CurrencyManager.format(plan.min_amount)}`); } if (
+                    plan.max_amount && amt > plan.max_amount) { return Toast.warning('Amount Too High',
+                        `Maximum investment is ${CurrencyManager.format(plan.max_amount)}`); } const user = appState
+                .currentUser; if (!user || user.balance < amt) { return Toast.error('Insufficient Deposit Balance',
+                        `Your deposit balance is ${CurrencyManager.format(user?.balance||0)}. Please deposit funds first.`); }
             closeModal('investmentModal');
             showLoader('Processing investment...'); try { const formData = new FormData();
                 formData.append('plan_id', plan._id);
@@ -3295,10 +3294,11 @@
                 formData.append('auto_renew', 'false'); const data = await ApiService.upload('/investments', formData);
                 user.balance -= amt;
                 StateManager.save('user', user);
-                appState.investments.unshift(data.investment);
+                appState.currentUser = user; if (data.investment) { appState.investments.unshift(data.investment); }
                 Toast.success('Investment Active!', `You've invested ${CurrencyManager.format(amt)} in ${plan.name}`);
-                loadDashboard(); } catch (err) { Toast.error('Investment Failed', err.message); } finally { hideLoader
-            (); } }
+                loadDashboard(); if (appState.currentSection === 'investments-section') { renderMyInvestments(); } } catch (
+            err) { console.error('Investment error:', err);
+                Toast.error('Investment Failed', err.message || 'Please try again later.'); } finally { hideLoader(); } }
         async function loadDeposits() { const u = appState.currentUser;
             document.getElementById('totalDeposited').textContent = CurrencyManager.formatFull(u.total_deposits || 0); try { const
                     data = await ApiService.get('/deposits');
