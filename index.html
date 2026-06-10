@@ -2721,7 +2721,7 @@
                     </div>
                     <h1 class="auth-title">Welcome back</h1>
                     <p class="auth-sub">Sign in to your investment account</p>
-                    <div class="form-group"><label class="form-label">Email Address</label><div class="input-icon-wrap"><i class="icon fa fa-envelope"></i><input type="email" class="form-input" id="loginEmail" placeholder="you@example.com" /></div></div>
+                    <div class="form-group"><label class="form-label">Email Address</label><div class="input-icon-wrap"><i class="icon fa fa-envelope"></i><input type="email" class="form-input" id="loginEmail" placeholder="you@example.com" /></div><div class="form-hint">Enter your registered email address, not phone number</div></div>
                     <div class="form-group"><label class="form-label">Password</label><div class="input-icon-wrap"><i class="icon fa fa-lock"></i><input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" /><span class="eye-toggle" onclick="togglePassword('loginPassword')"><i class="fa fa-eye"></i></span></div></div>
                     <div class="d-flex jc-between ai-center mt-4 mb-16"><label class="form-check"><input type="checkbox" id="rememberMe" /><span>Remember me</span></label><a style="font-size:0.8rem; color: var(--primary-400); cursor:pointer" onclick="forgotPassword()">Forgot password?</a></div>
                     <button class="btn btn-primary btn-full btn-lg" onclick="handleLogin()"><i class="fa fa-sign-in-alt"></i> Sign In</button>
@@ -2739,8 +2739,8 @@
                     <h1 class="auth-title">Create account</h1>
                     <p class="auth-sub">Start investing in top global stocks today</p>
                     <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" id="regFirstName" placeholder="John" /></div><div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" id="regLastName" placeholder="Doe" /></div></div>
-                    <div class="form-group"><label class="form-label">Email Address</label><div class="input-icon-wrap"><i class="icon fa fa-envelope"></i><input type="email" class="form-input" id="regEmail" placeholder="you@example.com" /></div></div>
-                    <div class="form-group"><label class="form-label">Phone Number</label><div class="input-icon-wrap"><i class="icon fa fa-phone"></i><input type="tel" class="form-input" id="regPhone" placeholder="+234 800 000 0000" /></div></div>
+                    <div class="form-group"><label class="form-label">Email Address</label><div class="input-icon-wrap"><i class="icon fa fa-envelope"></i><input type="email" class="form-input" id="regEmail" placeholder="you@example.com" /></div><div class="form-hint">Enter a valid email address</div></div>
+                    <div class="form-group"><label class="form-label">Phone Number</label><div class="input-icon-wrap"><i class="icon fa fa-phone"></i><input type="tel" class="form-input" id="regPhone" placeholder="+234 800 000 0000" /></div><div class="form-hint">Digits only, at least 5 characters</div></div>
                     <div class="form-group"><label class="form-label">Password</label><div class="input-icon-wrap"><i class="icon fa fa-lock"></i><input type="password" class="form-input" id="regPassword" placeholder="Min. 8 characters" /><span class="eye-toggle" onclick="togglePassword('regPassword')"><i class="fa fa-eye"></i></span></div></div>
                     <div class="form-group"><label class="form-label">Referral Code <span style="color:var(--text-muted)">(optional)</span></label><input type="text" class="form-input" id="regReferral" placeholder="Enter referral code" /></div>
                     <label class="form-check mb-16"><input type="checkbox" id="agreeTerms" /><span>I agree to the <a style="color:var(--primary-400)">Terms of Service</a> and <a style="color:var(--primary-400)">Privacy Policy</a></span></label>
@@ -2895,7 +2895,7 @@
                     <div class="breadcrumb"><i class="fa fa-home"></i><span>/</span><span>KYC Verification</span></div>
                     <div class="section-header"><h1>KYC Verification</h1><p>Verify your identity to unlock full platform features</p></div>
                     <div id="kycStatusCard" class="kyc-status-card"></div>
-                    <div class="grid-2"><div class="card"><div class="card-title mb-16">Submit Verification Documents</div><div class="form-group"><label class="form-label">Full Legal Name</label><input type="text" class="form-input" id="kycFullName" placeholder="As shown on ID" /></div><div class="form-row"><div class="form-group"><label class="form-label">Date of Birth</label><input type="date" class="form-input" id="kycDob" /></div><div class="form-group"><label class="form-label">Nationality</label><select class="form-input" id="kycNationality"><option>Nigerian</option><option>Ghanaian</option><option>Kenyan</option><option>South African</option><option>Other</option></select></div></div><div class="form-group"><label class="form-label">ID Type</label><select class="form-input" id="kycIdType"><option value="national_id">National ID (NIN)</option><option value="passport">International Passport</option><option value="driver_license">Driver's License</option><option value="voters_card">Voter's Card</option></select></div><div class="form-group"><label class="form-label">Upload Government ID (Front)</label><div class="file-upload-area"><input type="file" id="kycIdFront" accept="image/*,application/pdf" required /><div class="file-upload-icon"><i class="fa fa-id-card"></i></div><div class="file-upload-text">Upload ID front</div></div><div id="kycIdFrontPreview"></div></div><div class="form-group"><label class="form-label">Upload Government ID (Back) <span class="text-muted">(optional)</span></label><div class="file-upload-area"><input type="file" id="kycIdBack" accept="image/*,application/pdf" /><div class="file-upload-icon"><i class="fa fa-id-card"></i></div><div class="file-upload-text">Upload ID back</div></div><div id="kycIdBackPreview"></div></div><div class="form-group"><label class="form-label">Upload Selfie (holding ID)</label><div class="file-upload-area"><input type="file" id="kycSelfie" accept="image/*" required /><div class="file-upload-icon"><i class="fa fa-camera"></i></div><div class="file-upload-text">Upload selfie with ID</div></div><div id="kycSelfiePreview"></div></div><div class="form-group"><label class="form-label">Proof of Address</label><div class="file-upload-area"><input type="file" id="kycAddressProof" accept="image/*,application/pdf" required /><div class="file-upload-icon"><i class="fa fa-home"></i></div><div class="file-upload-text">Upload utility bill or bank statement</div></div><div id="kycAddressProofPreview"></div></div><button class="btn btn-primary btn-full" onclick="submitKYC()"><i class="fa fa-paper-plane"></i> Submit for Review</button></div><div><div class="card mb-20"><div class="card-title mb-12">🔓 KYC Benefits</div><div class="activity-feed"><div class="activity-item"><div class="activity-icon" style="background:rgba(16,185,129,0.1)"><i class="fa fa-check text-emerald"></i></div><div class="activity-info"><div class="activity-title">Unlimited Withdrawals</div><div class="activity-time">Remove daily withdrawal limits</div></div></div><div class="activity-item"><div class="activity-icon" style="background:rgba(251,191,36,0.1)"><i class="fa fa-star text-gold"></i></div><div class="activity-info"><div class="activity-title">Premium Plans Access</div><div class="activity-time">Invest in high-yield stock plans</div></div></div><div class="activity-item"><div class="activity-icon" style="background:rgba(59,130,246,0.1)"><i class="fa fa-shield-alt text-primary"></i></div><div class="activity-info"><div class="activity-title">Enhanced Security</div><div class="activity-time">Full account protection</div></div></div><div class="activity-item"><div class="activity-icon" style="background:rgba(56,189,248,0.1)"><i class="fa fa-headset" style="color:var(--accent-sky)"></i></div><div class="activity-info"><div class="activity-title">Priority Support</div><div class="activity-time">VIP customer service access</div></div></div></div></div><div class="card"><div class="card-title mb-12">📋 Requirements</div><div class="info-row"><span class="key">Gov. Issued ID</span><span class="badge badge-success">Required</span></div><div class="info-row"><span class="key">Selfie with ID</span><span class="badge badge-success">Required</span></div><div class="info-row"><span class="key">Proof of Address</span><span class="badge badge-success">Required</span></div><div class="info-row"><span class="key">Review Time</span><span class="val">24–48 hours</span></div></div></div></div>
+                    <div class="grid-2"><div class="card"><div class="card-title mb-16">Submit Verification Documents</div><div class="form-group"><label class="form-label">Full Legal Name</label><input type="text" class="form-input" id="kycFullName" placeholder="As shown on ID" /></div><div class="form-row"><div class="form-group"><label class="form-label">Date of Birth</label><input type="date" class="form-input" id="kycDob" /></div><div class="form-group"><label class="form-label">Nationality</label><select class="form-input" id="kycNationality"><option>Nigerian</option><option>Ghanaian</option><option>Kenyan</option><option>South African</option><option>Other</option></select></div></div><div class="form-group"><label class="form-label">ID Type</label><select class="form-input" id="kycIdType"><option value="national_id">National ID (NIN)</option><option value="passport">International Passport</option><option value="driver_license">Driver's License</option><option value="voters_card">Voter's Card</option></select></div><div class="form-group"><label class="form-label">ID Number</label><input type="text" class="form-input" id="kycIdNumber" placeholder="Enter your ID number" /></div><div class="form-group"><label class="form-label">Upload Government ID (Front)</label><div class="file-upload-area"><input type="file" id="kycIdFront" accept="image/*,application/pdf" required /><div class="file-upload-icon"><i class="fa fa-id-card"></i></div><div class="file-upload-text">Upload ID front</div></div><div id="kycIdFrontPreview"></div></div><div class="form-group"><label class="form-label">Upload Government ID (Back) <span class="text-muted">(optional)</span></label><div class="file-upload-area"><input type="file" id="kycIdBack" accept="image/*,application/pdf" /><div class="file-upload-icon"><i class="fa fa-id-card"></i></div><div class="file-upload-text">Upload ID back</div></div><div id="kycIdBackPreview"></div></div><div class="form-group"><label class="form-label">Upload Selfie (holding ID)</label><div class="file-upload-area"><input type="file" id="kycSelfie" accept="image/*" required /><div class="file-upload-icon"><i class="fa fa-camera"></i></div><div class="file-upload-text">Upload selfie with ID</div></div><div id="kycSelfiePreview"></div></div><div class="form-group"><label class="form-label">Proof of Address</label><div class="file-upload-area"><input type="file" id="kycAddressProof" accept="image/*,application/pdf" required /><div class="file-upload-icon"><i class="fa fa-home"></i></div><div class="file-upload-text">Upload utility bill or bank statement</div></div><div id="kycAddressProofPreview"></div></div><button class="btn btn-primary btn-full" onclick="submitKYC()"><i class="fa fa-paper-plane"></i> Submit for Review</button></div><div><div class="card mb-20"><div class="card-title mb-12">🔓 KYC Benefits</div><div class="activity-feed"><div class="activity-item"><div class="activity-icon" style="background:rgba(16,185,129,0.1)"><i class="fa fa-check text-emerald"></i></div><div class="activity-info"><div class="activity-title">Unlimited Withdrawals</div><div class="activity-time">Remove daily withdrawal limits</div></div></div><div class="activity-item"><div class="activity-icon" style="background:rgba(251,191,36,0.1)"><i class="fa fa-star text-gold"></i></div><div class="activity-info"><div class="activity-title">Premium Plans Access</div><div class="activity-time">Invest in high-yield stock plans</div></div></div><div class="activity-item"><div class="activity-icon" style="background:rgba(59,130,246,0.1)"><i class="fa fa-shield-alt text-primary"></i></div><div class="activity-info"><div class="activity-title">Enhanced Security</div><div class="activity-time">Full account protection</div></div></div><div class="activity-item"><div class="activity-icon" style="background:rgba(56,189,248,0.1)"><i class="fa fa-headset" style="color:var(--accent-sky)"></i></div><div class="activity-info"><div class="activity-title">Priority Support</div><div class="activity-time">VIP customer service access</div></div></div></div></div><div class="card"><div class="card-title mb-12">📋 Requirements</div><div class="info-row"><span class="key">Gov. Issued ID</span><span class="badge badge-success">Required</span></div><div class="info-row"><span class="key">Selfie with ID</span><span class="badge badge-success">Required</span></div><div class="info-row"><span class="key">Proof of Address</span><span class="badge badge-success">Required</span></div><div class="info-row"><span class="key">Review Time</span><span class="val">24–48 hours</span></div></div></div></div>
                 </section>
                 <section id="referrals-section" class="section">
                     <div class="breadcrumb"><i class="fa fa-home"></i><span>/</span><span>Referrals</span></div>
@@ -3042,9 +3042,17 @@
                 loadSupport(); break; case 'reports-section': break; case 'profile-section':
                 loadProfile(); break; case 'admin-section':
                 loadAdmin(); break; } }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function validateEmail(email) { return emailRegex.test(email); }
+
+        function validatePhone(phone) { return phone && phone.length >= 5 && /^\d+$/.test(phone); }
+
+        function validatePassword(pass) { return pass && pass.length >= 6; }
         async function handleLogin() { const email = document.getElementById('loginEmail').value.trim(); const pass =
-            document.getElementById('loginPassword').value; if (!email || !pass) return Toast.warning('Missing Fields',
-                'Please enter email and password.');
+            document.getElementById('loginPassword').value; if (!validateEmail(email)) { return Toast.warning('Invalid Email',
+                    'Please enter a valid email address (e.g., name@example.com)'); } if (!pass) { return Toast.warning(
+                    'Missing Password', 'Please enter your password.'); }
             showLoader('Signing you in...'); try { const data = await ApiService.post('/auth/login', { email,
                     password: pass });
                 StateManager.save('token', data.token);
@@ -3057,15 +3065,18 @@
         async function loginAsDemo() { document.getElementById('loginEmail').value = 'investor@demo.com'; document
             .getElementById('loginPassword').value = 'Demo123456'; await handleLogin(); }
         async function handleRegister() { const fn = document.getElementById('regFirstName').value.trim(); const ln = document
-                .getElementById('regLastName').value.trim(); const email = document.getElementById('regEmail').value
-                .trim(); const phone = document.getElementById('regPhone').value.trim(); const pass = document
-                .getElementById('regPassword').value; const ref = document.getElementById('regReferral').value.trim();
-            const agree = document.getElementById('agreeTerms').checked; if (!fn || !ln || !email || !pass) return Toast
-                .warning('Missing Fields', 'Please fill all required fields.'); if (!agree) return Toast.warning(
-                'Terms Required', 'Please accept the terms of service.'); if (pass.length < 6) return Toast.error(
-                'Weak Password', 'Password must be at least 6 characters.');
+                .getElementById('regLastName').value.trim(); const fullName = `${fn} ${ln}`.trim(); const email = document
+                .getElementById('regEmail').value.trim(); const phone = document.getElementById('regPhone').value.trim();
+            const pass = document.getElementById('regPassword').value; const ref = document.getElementById('regReferral')
+                .value.trim(); const agree = document.getElementById('agreeTerms').checked; if (fullName.length < 2 ||
+                fullName.length > 100) { return Toast.warning('Invalid Name', 'Full name must be 2–100 characters'); } if (
+                !validateEmail(email)) { return Toast.warning('Invalid Email', 'Enter a valid email address'); } if (!validatePhone(
+                    phone)) { return Toast.warning('Invalid Phone', 'Enter a valid phone number (digits only, at least 5 digits)'); } if (
+                !validatePassword(pass)) { return Toast.warning('Weak Password',
+                'Password must be at least 6 characters'); } if (!agree) { return Toast.warning('Terms Required',
+                'You must agree to the Terms of Service'); }
             showLoader('Creating your account...'); try { const data = await ApiService.post('/auth/register', {
-                    full_name: `${fn} ${ln}`,
+                    full_name: fullName,
                     email,
                     phone,
                     password: pass,
@@ -3088,7 +3099,8 @@
             showSection('login-section');
             closeSidebar();
             Toast.info('Signed out', 'You have been logged out successfully.'); }
-        async function forgotPassword() { const email = prompt('Enter your email address:'); if (!email) return;
+        async function forgotPassword() { const email = prompt('Enter your email address:'); if (!email) return; if (!
+                validateEmail(email)) { return Toast.warning('Invalid Email', 'Please enter a valid email address.'); }
             showLoader('Sending reset link...'); try { await ApiService.post('/auth/forgot-password', { email });
                 Toast.success('Reset link sent', 'Check your email inbox.'); } catch (err) { Toast.error('Failed', err
                     .message); } finally { hideLoader(); } }
@@ -3436,14 +3448,16 @@
             .currentUser; const withdrawable = u.withdrawable_earnings || 0; if (amt > withdrawable) return Toast.error(
                 'Insufficient Earnings',
                 `You can only withdraw earnings, not deposit balance. Available: ${CurrencyManager.format(withdrawable)}`);
-            if (!u.kyc_verified) return Toast.warning('KYC Required', 'Please complete KYC verification first.'); if (
-                appState.lastDepositTimestamp) { const cooldownMs = 48 * 60 * 60 * 1000; const elapsed = Date.now() -
-                appState.lastDepositTimestamp; if (elapsed < cooldownMs) { const remaining = cooldownMs - elapsed;
-                const hours = Math.floor(remaining / (60 * 60 * 1000)); const minutes = Math.floor((remaining %
-                    (60 * 60 * 1000)) / (60 * 1000)); return Toast.warning('Withdrawal on Cooldown',
-                    `Please wait ${hours}h ${minutes}m before withdrawing. A 48-hour cooldown is active after your last deposit.`
-                    ); } }
-            const method = document.getElementById('withdrawMethod').value;
+            if (!u.kyc_verified) return Toast.warning('KYC Required', 'Please complete KYC verification first.'); const
+            method = document.getElementById('withdrawMethod').value; if (method === 'bank_transfer') { const bank = u
+                    .bank_details; if (!bank || !bank.account_number) { return Toast.warning('Bank Details Missing',
+                        'Please add and verify bank details in Profile'); } } if (appState.lastDepositTimestamp) { const
+                    cooldownMs = 48 * 60 * 60 * 1000; const elapsed = Date.now() - appState.lastDepositTimestamp; if (
+                        elapsed < cooldownMs) { const remaining = cooldownMs - elapsed; const hours = Math.floor(
+                            remaining / (60 * 60 * 1000)); const minutes = Math.floor((remaining % (60 * 60 * 1000)) /
+                            (60 * 1000)); return Toast.warning('Withdrawal on Cooldown',
+                            `Please wait ${hours}h ${minutes}m before withdrawing. A 48-hour cooldown is active after your last deposit.`
+                            ); } }
             showLoader('Processing withdrawal...'); try { const data = await ApiService.post('/withdrawals', { amount: amt,
                     payment_method: method });
                 appState.withdrawals.unshift(data.withdrawal);
@@ -3511,11 +3525,15 @@
             err) { console.warn('Could not load KYC status'); } }
         async function submitKYC() { const name = document.getElementById('kycFullName').value.trim(); const dob = document
             .getElementById('kycDob').value; const nationality = document.getElementById('kycNationality').value; const
-            idType = document.getElementById('kycIdType').value; const idNumber = 'N/A'; const idFront = document
-            .getElementById('kycIdFront').files[0]; const selfie = document.getElementById('kycSelfie').files[0];
-            const addressProof = document.getElementById('kycAddressProof').files[0]; if (!name || !dob || !nationality ||
-                !idType || !idFront || !selfie || !addressProof) { return Toast.warning('Missing Fields',
-                'Please fill all required fields and upload all required documents.'); }
+            idType = document.getElementById('kycIdType').value; const idNumber = document.getElementById('kycIdNumber')
+            .value.trim(); const idFront = document.getElementById('kycIdFront').files[0]; const selfie = document
+            .getElementById('kycSelfie').files[0]; const addressProof = document.getElementById('kycAddressProof').files[
+                0]; if (!name || !dob || !nationality || !idType) { return Toast.warning('Missing Fields',
+                'Please fill all required fields.'); } if (!idNumber) { return Toast.warning('Missing ID Number',
+                'Please enter your ID number'); } if (!idFront) { return Toast.warning('Missing ID Front',
+                'Please upload front of ID'); } if (!selfie) { return Toast.warning('Missing Selfie',
+                'Please upload selfie with ID'); } if (!addressProof) { return Toast.warning('Missing Address Proof',
+                'Please upload proof of address'); }
             showLoader('Submitting KYC...'); try { const formData = new FormData();
                 formData.append('full_name', name);
                 formData.append('id_type', idType);
@@ -3590,8 +3608,10 @@
             icon.style.transform = open ? '' : 'rotate(180deg)'; }
         async function submitTicket() { const subject = document.getElementById('ticketSubject').value.trim(); const
             category = document.getElementById('ticketCategory').value; const priority = document.getElementById(
-                'ticketPriority').value; const message = document.getElementById('ticketMessage').value.trim(); if (!subject ||
-                !message) return Toast.warning('Missing Fields', 'Please fill subject and message.');
+                'ticketPriority').value; const message = document.getElementById('ticketMessage').value.trim(); if (subject
+                .length < 5 || subject.length > 200) { return Toast.warning('Invalid Subject',
+                'Subject must be 5–200 characters'); } if (message.length < 10 || message.length > 5000) { return Toast
+                .warning('Invalid Message', 'Message must be 10–5000 characters'); }
             showLoader('Submitting ticket...'); try { const formData = new FormData();
                 formData.append('subject', subject);
                 formData.append('category', category);
@@ -3641,7 +3661,9 @@
         async function updateProfile() { const name = document.getElementById('profName').value.trim(); const phone = document
             .getElementById('profPhone').value.trim(); const risk = document.getElementById('profRisk').value; const
             strategy = document.getElementById('profStrategy').value; const country = document.getElementById(
-                'profCountry').value.trim(); if (!name) return Toast.warning('Invalid Name', 'Name cannot be empty.');
+                'profCountry').value.trim(); if (name && (name.length < 2 || name.length > 100)) { return Toast.warning(
+                    'Invalid Name', 'Full name must be 2–100 characters'); } if (phone && !validatePhone(phone)) { return Toast
+                    .warning('Invalid Phone', 'Phone number must be at least 5 digits'); }
             showLoader('Saving...'); try { const data = await ApiService.put('/profile', { full_name: name, phone,
                     risk_tolerance: risk, investment_strategy: strategy, country });
                 appState.currentUser = { ...appState.currentUser, ...data.user };
@@ -3650,10 +3672,10 @@
                 Toast.success('Profile Updated!', 'Your information has been saved.'); } catch (err) { Toast.error(
                     'Update failed', err.message); } finally { hideLoader(); } }
         async function changePassword() { const curr = document.getElementById('currentPass').value; const newP = document
-            .getElementById('newPass').value; const conf = document.getElementById('confirmPass').value; if (!curr || !newP ||
-                !conf) return Toast.warning('Missing Fields', 'Please fill all password fields.'); if (newP !== conf)
-            return Toast.error('Mismatch', 'New passwords do not match.'); if (newP.length < 6) return Toast.error(
-                'Too Short', 'Password must be at least 6 characters.');
+            .getElementById('newPass').value; const conf = document.getElementById('confirmPass').value; if (!curr) return Toast
+                .warning('Missing Current Password', 'Please enter your current password'); if (newP.length < 6) return Toast
+                .warning('Weak Password', 'New password must be at least 6 characters'); if (newP !== conf) return Toast
+                .warning('Password Mismatch', 'New passwords do not match');
             showLoader('Updating password...'); try { await ApiService.post('/auth/change-password', { currentPassword: curr,
                     newPassword: newP });
                 document.getElementById('currentPass').value = '';
@@ -3661,13 +3683,15 @@
                 document.getElementById('confirmPass').value = '';
                 Toast.success('Password Updated!', 'Your password has been changed successfully.'); } catch (err) { Toast
                 .error('Failed', err.message); } finally { hideLoader(); } }
-        async function saveBankDetails() { const bank = document.getElementById('bankName').value; const accName = document
-            .getElementById('bankAccountName').value.trim(); const accNum = document.getElementById('bankAccountNumber')
-            .value.trim(); const bankCode = document.getElementById('bankCode').value.trim(); if (!accName || !accNum ||
-                bank === 'Select Bank') return Toast.warning('Missing Fields', 'Please fill all bank details.'); if (accNum
-                .length !== 10) return Toast.error('Invalid Account', 'Account number must be 10 digits.');
-            showLoader('Saving bank details...'); try { await ApiService.put('/profile/bank', { bank_name: bank,
-                    account_name: accName, account_number: accNum, bank_code: bankCode });
+        async function saveBankDetails() { const bankName = document.getElementById('bankName').value; const accountName =
+            document.getElementById('bankAccountName').value.trim(); const accountNumber = document.getElementById(
+                'bankAccountNumber').value.trim(); const bankCode = document.getElementById('bankCode').value.trim(); if (
+                bankName === 'Select Bank' || !bankName) { return Toast.warning('Select Bank',
+                'Please choose a bank'); } if (!accountName) { return Toast.warning('Missing Account Name',
+                'Enter account holder name'); } if (!/^\d{10}$/.test(accountNumber)) { return Toast.warning(
+                'Invalid Account Number', 'Account number must be exactly 10 digits'); }
+            showLoader('Saving bank details...'); try { await ApiService.put('/profile/bank', { bank_name: bankName,
+                    account_name: accountName, account_number: accountNumber, bank_code: bankCode });
                 Toast.success('Bank Details Saved!', 'Your bank details have been saved.'); } catch (err) { Toast.error(
                     'Failed', err.message); } finally { hideLoader(); } }
 
