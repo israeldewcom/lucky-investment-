@@ -9,7 +9,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Stock Pulse · Next‑Gen Wealth</title>
     <link rel="manifest" href="/manifest.json">
-    <meta name="google-site-verification" content="PB3lWW6G3FccAT72e65ehI6ILq12ZxNzS_RUsXDVufE" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -2846,7 +2845,7 @@
                                     <div class="sub-header"><h3><i class="fa fa-building-columns text-primary"></i> Opay Transfer Details</h3></div>
                                     <div class="info-row"><span class="key">Bank/Wallet</span><span class="val fw-600">Opay</span></div>
                                     <div class="info-row"><span class="key">Account Name</span><span class="val fw-600">Heaval Leah</span></div>
-                                    <div class="info-row"><span class="key">Account Number</span><span class="val mono fw-600">7084472673</span></div>
+                                    <div class="info-row"><span class="key">Account Number</span><span class="val mono fw-600">07084472673</span></div>
                                     <button class="btn btn-ghost btn-sm mt-8" onclick="copyText('07084472673','Account number copied!')"><i class="fa fa-copy"></i> Copy Account</button>
                                 </div>
                                 <div id="cryptoDepDetails" style="display:none;margin-bottom:16px"><div class="card" style="background:var(--bg-card)"><div class="sub-header"><h3><i class="fa fa-bitcoin-sign text-primary"></i> USDT (TRC-20) Address</h3></div><div class="crypto-addr"><div class="addr" id="cryptoAddress">TStockPulseUSDTAddressXXXXXXXXXXXXX</div><button class="btn btn-ghost btn-sm" onclick="copyText(document.getElementById('cryptoAddress').textContent,'Address copied!')"><i class="fa fa-copy"></i></button></div><p class="form-hint mt-8">⚠️ Only send USDT via TRC-20 network.</p></div></div>
@@ -3050,6 +3049,8 @@
         function validatePhone(phone) { return phone && phone.length >= 5 && /^\d+$/.test(phone); }
 
         function validatePassword(pass) { return pass && pass.length >= 6; }
+
+        function validateBankAccountNumber(num) { return /^\d{10}$/.test(num); }
         async function handleLogin() { const email = document.getElementById('loginEmail').value.trim(); const pass =
             document.getElementById('loginPassword').value; if (!validateEmail(email)) { return Toast.warning('Invalid Email',
                     'Please enter a valid email address (e.g., name@example.com)'); } if (!pass) { return Toast.warning(
@@ -3451,12 +3452,14 @@
                 `You can only withdraw earnings, not deposit balance. Available: ${CurrencyManager.format(withdrawable)}`);
             if (!u.kyc_verified) return Toast.warning('KYC Required', 'Please complete KYC verification first.'); const
             method = document.getElementById('withdrawMethod').value; if (method === 'bank_transfer') { const bank = u
-                    .bank_details; if (!bank || !bank.account_number) { return Toast.warning('Bank Details Missing',
-                        'Please add and verify bank details in Profile'); } } if (appState.lastDepositTimestamp) { const
-                    cooldownMs = 48 * 60 * 60 * 1000; const elapsed = Date.now() - appState.lastDepositTimestamp; if (
-                        elapsed < cooldownMs) { const remaining = cooldownMs - elapsed; const hours = Math.floor(
-                            remaining / (60 * 60 * 1000)); const minutes = Math.floor((remaining % (60 * 60 * 1000)) /
-                            (60 * 1000)); return Toast.warning('Withdrawal on Cooldown',
+                    .bank_details; if (!bank || !bank.account_name || !bank.account_number) { return Toast.warning(
+                        'Bank Details Missing', 'Please add and verify bank details in Profile'); } if (!validateBankAccountNumber(
+                        bank.account_number)) { return Toast.warning('Invalid Bank Account',
+                        'Your saved account number is invalid. Please update in Profile.'); } } if (appState
+                    .lastDepositTimestamp) { const cooldownMs = 48 * 60 * 60 * 1000; const elapsed = Date.now() - appState
+                    .lastDepositTimestamp; if (elapsed < cooldownMs) { const remaining = cooldownMs - elapsed; const hours =
+                        Math.floor(remaining / (60 * 60 * 1000)); const minutes = Math.floor((remaining % (60 * 60 *
+                            1000)) / (60 * 1000)); return Toast.warning('Withdrawal on Cooldown',
                             `Please wait ${hours}h ${minutes}m before withdrawing. A 48-hour cooldown is active after your last deposit.`
                             ); } }
             showLoader('Processing withdrawal...'); try { const data = await ApiService.post('/withdrawals', { amount: amt,
@@ -3689,12 +3692,12 @@
                 'bankAccountNumber').value.trim(); const bankCode = document.getElementById('bankCode').value.trim(); if (
                 bankName === 'Select Bank' || !bankName) { return Toast.warning('Select Bank',
                 'Please choose a bank'); } if (!accountName) { return Toast.warning('Missing Account Name',
-                'Enter account holder name'); } if (!/^\d{10}$/.test(accountNumber)) { return Toast.warning(
-                'Invalid Account Number', 'Account number must be exactly 10 digits'); }
+                'Enter account holder name'); } if (!validateBankAccountNumber(accountNumber)) { return Toast.warning(
+                'Invalid Account Number', 'Account number must be exactly 10 digits (0-9 only)'); }
             showLoader('Saving bank details...'); try { await ApiService.put('/profile/bank', { bank_name: bankName,
-                    account_name: accountName, account_number: accountNumber, bank_code: bankCode });
-                Toast.success('Bank Details Saved!', 'Your bank details have been saved.'); } catch (err) { Toast.error(
-                    'Failed', err.message); } finally { hideLoader(); } }
+                    account_name: accountName, account_number: accountNumber, bank_code: bankCode || '' });
+                Toast.success('Bank Details Saved!', 'Your bank details have been saved.');
+                loadProfile(); } catch (err) { Toast.error('Failed', err.message); } finally { hideLoader(); } }
 
         function requestBankVerification() { Toast.info('Verification Requested',
             'Bank account verification request sent. Usually takes 1 business day.'); }
