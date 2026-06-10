@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="StockPulse – AI-Powered Stock Investment Platform. Real-time earnings, smart insights, and full PWA support.">
+    <meta name="description" content="Stock Pulse – AI-Powered Stock Investment Platform. Real-time earnings, smart insights, and full PWA support.">
     <meta name="theme-color" content="#0b1120">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="StockPulse">
-    <title>StockPulse · Next‑Gen Wealth</title>
+    <title>Stock Pulse · Next‑Gen Wealth</title>
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png">
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -20,6 +16,9 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js">
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5224024430002176" crossorigin="anonymous">
@@ -44,25 +43,25 @@
             --accent-amber: #f97316;
             --accent-sky: #38bdf8;
             --accent-violet: #8b5cf6;
-            --bg-deep: #060b18;
-            --bg-base: #0a0f1c;
-            --bg-card: #111827;
-            --bg-card-hover: #1f2937;
-            --bg-glass: rgba(17, 24, 39, 0.8);
-            --bg-glass-heavy: rgba(10, 15, 28, 0.95);
+            --bg-deep: #0b1120;
+            --bg-base: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #2d3a4f;
+            --bg-glass: rgba(30, 41, 59, 0.8);
+            --bg-glass-heavy: rgba(15, 23, 42, 0.95);
             --border-light: rgba(59, 130, 246, 0.2);
             --border-medium: rgba(59, 130, 246, 0.4);
             --border-glow: rgba(59, 130, 246, 0.6);
-            --text-primary: #f1f5f9;
+            --text-primary: #f8fafc;
             --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
             --text-gold: #fbbf24;
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
-            --shadow-primary: 0 0 32px rgba(59, 130, 246, 0.35);
-            --shadow-gold: 0 0 32px rgba(251, 191, 36, 0.35);
-            --shadow-glow: 0 0 48px rgba(59, 130, 246, 0.5);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.4);
+            --shadow-primary: 0 0 24px rgba(59, 130, 246, 0.3);
+            --shadow-gold: 0 0 24px rgba(251, 191, 36, 0.3);
+            --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.5);
             --radius-xs: 6px;
             --radius-sm: 10px;
             --radius-md: 14px;
@@ -87,12 +86,12 @@
             --bg-glass-heavy: rgba(255, 255, 255, 0.98);
             --border-light: rgba(59, 130, 246, 0.15);
             --border-medium: rgba(59, 130, 246, 0.3);
-            --text-primary: #0a0f1c;
+            --text-primary: #0f172a;
             --text-secondary: #334155;
             --text-muted: #64748b;
             --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.15);
         }
         *,
         *::before,
@@ -219,7 +218,7 @@
         .bg-grid {
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(59, 130, 246, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
             background-size: 72px 72px;
         }
         @keyframes orbFloat {
@@ -250,8 +249,8 @@
             right: 0;
             height: var(--navbar-h);
             background: var(--bg-glass-heavy);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-light);
             display: flex;
             align-items: center;
@@ -277,7 +276,7 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-400));
             border-radius: 11px;
             display: flex;
             align-items: center;
@@ -291,20 +290,20 @@
         @keyframes pulseGlow {
             0%,
             100% {
-                box-shadow: 0 0 16px rgba(59, 130, 246, 0.4);
+                box-shadow: 0 0 12px var(--primary-400);
             }
             50% {
-                box-shadow: 0 0 28px rgba(59, 130, 246, 0.7);
+                box-shadow: 0 0 24px var(--primary-500);
             }
         }
         .logo-icon:hover {
             transform: scale(1.05) rotate(3deg);
         }
         .navbar-logo span.sub {
-            font-size: 0.62rem;
+            font-size: 0.65rem;
             font-weight: 400;
             color: var(--text-muted);
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             display: block;
             line-height: 1.2;
             text-transform: uppercase;
@@ -422,8 +421,8 @@
             width: 85%;
             max-width: 300px;
             background: var(--bg-glass-heavy);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-right: 1px solid var(--border-light);
             display: flex;
             flex-direction: column;
@@ -464,7 +463,7 @@
             min-height: 44px;
         }
         .nav-item:hover {
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.08);
             color: var(--text-primary);
         }
         .nav-item.active {
@@ -528,6 +527,7 @@
             border-radius: 12px;
             background: var(--bg-card);
             border: 1px solid var(--border-light);
+            margin-bottom: 12px;
         }
         .sidebar-user-card .avatar {
             width: 38px;
@@ -666,18 +666,18 @@
         .auth-logo .logo-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-400));
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             box-shadow: var(--shadow-primary);
         }
         .auth-logo .logo-text {
             font-family: var(--font-display);
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--text-primary);
         }
         .auth-title {
@@ -876,7 +876,7 @@
             left: 50%;
             width: 120%;
             height: 120%;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.5s ease;
@@ -888,9 +888,9 @@
             transition: 0s;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
             color: #fff;
-            border-color: #3b82f6;
+            border-color: var(--primary-500);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
@@ -1071,10 +1071,6 @@
             background: rgba(244, 63, 94, 0.12);
             color: var(--accent-rose);
         }
-        .stat-icon.sky {
-            background: rgba(56, 189, 248, 0.12);
-            color: var(--accent-sky);
-        }
         .stat-value {
             font-family: var(--font-mono);
             font-size: 1.4rem;
@@ -1100,6 +1096,20 @@
         }
         .stat-trend.down {
             color: var(--accent-rose);
+        }
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-sm);
+        }
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
         }
         .badge {
             display: inline-flex;
@@ -1461,10 +1471,10 @@
             justify-content: flex-end;
         }
         .balance-hero {
-            background: linear-gradient(135deg, #111827, #060b18);
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             border: 1px solid var(--border-medium);
             border-radius: var(--radius-xl);
-            padding: 28px 22px;
+            padding: 24px 20px;
             margin-bottom: 22px;
             position: relative;
             overflow: hidden;
@@ -1474,29 +1484,17 @@
             position: absolute;
             top: -30px;
             right: -30px;
-            width: 220px;
-            height: 220px;
+            width: 200px;
+            height: 200px;
             background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent);
-            border-radius: 50%;
-        }
-        .balance-hero::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            left: -20px;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.1), transparent);
             border-radius: 50%;
         }
         .balance-label {
             font-size: 0.75rem;
             color: var(--text-muted);
-            letter-spacing: 0.06em;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
             margin-bottom: 6px;
-            position: relative;
-            z-index: 1;
         }
         .balance-amount {
             font-family: var(--font-mono);
@@ -1505,22 +1503,16 @@
             color: var(--primary-400);
             line-height: 1;
             margin-bottom: 6px;
-            position: relative;
-            z-index: 1;
         }
         .balance-sub {
             font-size: 0.78rem;
             color: var(--text-secondary);
-            position: relative;
-            z-index: 1;
         }
         .balance-actions {
             display: flex;
             gap: 10px;
             margin-top: 18px;
             flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
         }
         .quick-actions {
             display: grid;
@@ -1907,7 +1899,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(6, 11, 24, 0.85);
+            background: rgba(11, 17, 32, 0.8);
             z-index: 500;
             align-items: center;
             justify-content: center;
@@ -1937,32 +1929,6 @@
             font-size: 0.9rem;
             color: var(--text-secondary);
         }
-        .offline-banner {
-            display: none;
-            position: fixed;
-            top: var(--navbar-h);
-            left: 0;
-            right: 0;
-            background: var(--accent-amber);
-            color: #0b1120;
-            padding: 8px 16px;
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 99;
-            animation: slideDown 0.3s ease;
-        }
-        .offline-banner.show {
-            display: block;
-        }
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
         .bottom-nav {
             display: flex;
             position: fixed;
@@ -1971,8 +1937,8 @@
             right: 0;
             height: var(--bottom-h);
             background: var(--bg-glass-heavy);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-light);
             z-index: 100;
             padding: 0 8px;
@@ -2393,6 +2359,24 @@
             color: var(--text-primary);
             margin-bottom: 2px;
         }
+        .offline-banner {
+            position: fixed;
+            top: var(--navbar-h);
+            left: 0;
+            right: 0;
+            background: rgba(251, 146, 60, 0.95);
+            color: #0b1120;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 101;
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+        .offline-banner.show {
+            display: block;
+        }
         .d-flex {
             display: flex;
         }
@@ -2680,10 +2664,8 @@
             <p class="loader-text" id="loaderText">Processing...</p>
         </div>
     </div>
-    <div class="offline-banner" id="offlineBanner">
-        <i class="fa fa-wifi"></i> You are offline. Some features may be limited.
-    </div>
     <div class="toast-container" id="toastContainer"></div>
+    <div class="offline-banner" id="offlineBanner"><i class="fa fa-wifi-slash"></i> You are offline. Using cached data.</div>
     <div class="notif-panel" id="notifPanel">
         <div class="notif-panel-header">
             <h4>Notifications</h4>
@@ -2694,7 +2676,7 @@
     <div class="install-banner hidden" id="installBanner">
         <span class="ib-icon">📱</span>
         <div class="ib-text">
-            <h4>Install StockPulse</h4>
+            <h4>Install Stock Pulse</h4>
             <p>Get the full app experience</p>
         </div>
         <div class="ib-actions">
@@ -2733,12 +2715,12 @@
                     <div class="auth-logo">
                         <div class="logo-icon">📈</div>
                         <div>
-                            <div class="logo-text">StockPulse</div>
-                            <div style="font-size:0.62rem; color: var(--text-muted); letter-spacing:0.06em;">NEXT‑GEN WEALTH</div>
+                            <div class="logo-text">Stock Pulse</div>
+                            <div style="font-size:0.65rem; color: var(--text-muted); letter-spacing:0.04em;">NEXT‑GEN WEALTH</div>
                         </div>
                     </div>
                     <h1 class="auth-title">Welcome back</h1>
-                    <p class="auth-sub">Sign in to your StockPulse investment account</p>
+                    <p class="auth-sub">Sign in to your investment account</p>
                     <div class="form-group"><label class="form-label">Email Address</label><div class="input-icon-wrap"><i class="icon fa fa-envelope"></i><input type="email" class="form-input" id="loginEmail" placeholder="you@example.com" /></div></div>
                     <div class="form-group"><label class="form-label">Password</label><div class="input-icon-wrap"><i class="icon fa fa-lock"></i><input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" /><span class="eye-toggle" onclick="togglePassword('loginPassword')"><i class="fa fa-eye"></i></span></div></div>
                     <div class="d-flex jc-between ai-center mt-4 mb-16"><label class="form-check"><input type="checkbox" id="rememberMe" /><span>Remember me</span></label><a style="font-size:0.8rem; color: var(--primary-400); cursor:pointer" onclick="forgotPassword()">Forgot password?</a></div>
@@ -2753,7 +2735,7 @@
         <section id="register-section" class="section">
             <div class="auth-wrapper">
                 <div class="auth-card" style="max-width:460px">
-                    <div class="auth-logo"><div class="logo-icon">📈</div><div><div class="logo-text">StockPulse</div><div style="font-size:0.62rem; color: var(--text-muted); letter-spacing:0.06em;">NEXT‑GEN WEALTH</div></div></div>
+                    <div class="auth-logo"><div class="logo-icon">📈</div><div><div class="logo-text">Stock Pulse</div><div style="font-size:0.65rem; color: var(--text-muted); letter-spacing:0.04em;">NEXT‑GEN WEALTH</div></div></div>
                     <h1 class="auth-title">Create account</h1>
                     <p class="auth-sub">Start investing in top global stocks today</p>
                     <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" id="regFirstName" placeholder="John" /></div><div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" id="regLastName" placeholder="Doe" /></div></div>
@@ -2771,7 +2753,7 @@
             <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
             <nav class="navbar">
                 <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
-                <div class="navbar-logo"><div class="logo-icon">📈</div><div><span class="name" style="font-family: var(--font-display); font-weight:700; font-size:1rem;">StockPulse</span><span class="sub">Next‑Gen Wealth</span></div></div>
+                <div class="navbar-logo"><div class="logo-icon">📈</div><div><span class="name" style="font-family: var(--font-display); font-weight:700; font-size:1rem;">Stock Pulse</span><span class="sub">Next‑Gen Wealth</span></div></div>
                 <div class="ticker-wrap" style="flex:1; margin:0 12px; display:none" id="navTicker"><div class="ticker-inner" id="tickerInner"></div></div>
                 <div class="navbar-spacer"></div>
                 <div class="navbar-actions">
@@ -2786,8 +2768,8 @@
                     <div class="sidebar-label">Main</div>
                     <div class="nav-item active" onclick="navigateTo('dashboard-section')" data-section="dashboard-section"><div class="nav-icon"><i class="fa fa-home"></i></div> Dashboard</div>
                     <div class="nav-item" onclick="navigateTo('investments-section')" data-section="investments-section"><div class="nav-icon"><i class="fa fa-chart-line"></i></div> Investments</div>
-                    <div class="nav-item" onclick="navigateTo('deposits-section')" data-section="deposits-section"><div class="nav-icon"><i class="fa fa-arrow-down"></i></div> Deposits</div>
-                    <div class="nav-item" onclick="navigateTo('withdrawals-section')" data-section="withdrawals-section"><div class="nav-icon"><i class="fa fa-arrow-up"></i></div> Withdrawals</div>
+                    <div class="nav-item" onclick="navigateTo('deposits-section')" data-section="deposits-section"><div class="nav-icon"><i class="fa fa-arrow-down-to-line"></i></div> Deposits</div>
+                    <div class="nav-item" onclick="navigateTo('withdrawals-section')" data-section="withdrawals-section"><div class="nav-icon"><i class="fa fa-arrow-up-from-bracket"></i></div> Withdrawals</div>
                     <div class="nav-item" onclick="navigateTo('transactions-section')" data-section="transactions-section"><div class="nav-icon"><i class="fa fa-list-ul"></i></div> Transactions</div>
                 </div>
                 <div class="sidebar-section">
@@ -2840,7 +2822,7 @@
                             <div class="card"><div class="sub-header"><h3>Notifications</h3><button class="btn btn-ghost btn-sm" onclick="toggleNotifPanel()">View <i class="fa fa-arrow-right"></i></button></div><div id="dashNotifications"></div></div>
                         </div>
                     </div>
-                    <div class="card mt-20"><div class="card-header"><div class="card-title">Regulatory Compliance</div><span class="badge badge-success"><i class="fa fa-check"></i> Fully Compliant</span></div><p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:14px">StockPulse operates under full regulatory oversight ensuring your funds are safe and protected.</p><div class="reg-badges"><div class="reg-badge"><div class="rb-icon">CBN</div><div class="rb-text"><strong>Central Bank of Nigeria</strong>Licensed Financial Institution</div></div><div class="reg-badge"><div class="rb-icon">SEC</div><div class="rb-text"><strong>Securities & Exchange Commission</strong>Registered Investment Platform</div></div><div class="reg-badge"><div class="rb-icon">SON</div><div class="rb-text"><strong>Standards Organisation of Nigeria</strong>Quality Certified Service</div></div></div></div>
+                    <div class="card mt-20"><div class="card-header"><div class="card-title">Regulatory Compliance</div><span class="badge badge-success"><i class="fa fa-check"></i> Fully Compliant</span></div><p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:14px">Stock Pulse operates under full regulatory oversight ensuring your funds are safe and protected.</p><div class="reg-badges"><div class="reg-badge"><div class="rb-icon">CBN</div><div class="rb-text"><strong>Central Bank of Nigeria</strong>Licensed Financial Institution</div></div><div class="reg-badge"><div class="rb-icon">SEC</div><div class="rb-text"><strong>Securities & Exchange Commission</strong>Registered Investment Platform</div></div><div class="reg-badge"><div class="rb-icon">SON</div><div class="rb-text"><strong>Standards Organisation of Nigeria</strong>Quality Certified Service</div></div></div></div>
                 </section>
                 <section id="investments-section" class="section">
                     <div class="breadcrumb"><i class="fa fa-home"></i><span>/</span><span>Investments</span></div>
@@ -2859,13 +2841,19 @@
                                 <div class="card-title mb-16">Deposit Details</div>
                                 <div class="form-group"><label class="form-label">Amount (₦)</label><div class="input-icon-wrap"><i class="icon fa fa-naira-sign"></i><input type="number" class="form-input" id="depositAmount" placeholder="Min. ₦3,000" min="3000" onchange="validateDeposit()" /></div><div class="form-hint">Minimum deposit: ₦3,000</div><div class="form-error" id="depositAmtErr">Amount must be at least ₦3,000</div></div>
                                 <div class="form-group"><label class="form-label">Payment Method</label><div class="payment-methods"><div class="pay-method selected" onclick="selectPayMethod(this,'bank_transfer')" data-method="bank_transfer"><i class="fa fa-building-columns"></i><span>Bank Transfer</span></div><div class="pay-method" onclick="selectPayMethod(this,'crypto')" data-method="crypto"><i class="fa fa-bitcoin-sign"></i><span>Crypto</span></div><div class="pay-method" onclick="selectPayMethod(this,'card')" data-method="card"><i class="fa fa-credit-card"></i><span>Card</span></div></div></div>
-                                <div id="bankDepDetails" class="card" style="background:var(--bg-card);margin-bottom:16px"><div class="sub-header"><h3><i class="fa fa-building-columns text-primary"></i> Opay Transfer Details</h3></div><div class="info-row"><span class="key">Bank / Wallet</span><span class="val fw-600">Opay</span></div><div class="info-row"><span class="key">Account Name</span><span class="val fw-600">Heaval Leah</span></div><div class="info-row"><span class="key">Account Number</span><span class="val mono fw-600">07084472673</span></div><button class="btn btn-ghost btn-sm mt-8" onclick="copyText('07084472673','Account number copied!')"><i class="fa fa-copy"></i> Copy Account</button></div>
-                                <div id="cryptoDepDetails" style="display:none;margin-bottom:16px"><div class="card" style="background:var(--bg-card)"><div class="sub-header"><h3><i class="fa fa-bitcoin-sign text-primary"></i> USDT (TRC-20) Address</h3></div><div class="crypto-addr"><div class="addr" id="cryptoAddress">TStockPulseDepositUSDTAddressXXXXXXXXX</div><button class="btn btn-ghost btn-sm" onclick="copyText(document.getElementById('cryptoAddress').textContent,'Address copied!')"><i class="fa fa-copy"></i></button></div><p class="form-hint mt-8">⚠️ Only send USDT via TRC-20 network.</p></div></div>
+                                <div id="bankDepDetails" class="card" style="background:var(--bg-card);margin-bottom:16px">
+                                    <div class="sub-header"><h3><i class="fa fa-building-columns text-primary"></i> Opay Transfer Details</h3></div>
+                                    <div class="info-row"><span class="key">Bank/Wallet</span><span class="val fw-600">Opay</span></div>
+                                    <div class="info-row"><span class="key">Account Name</span><span class="val fw-600">Heaval Leah</span></div>
+                                    <div class="info-row"><span class="key">Account Number</span><span class="val mono fw-600">07084472673</span></div>
+                                    <button class="btn btn-ghost btn-sm mt-8" onclick="copyText('07084472673','Account number copied!')"><i class="fa fa-copy"></i> Copy Account</button>
+                                </div>
+                                <div id="cryptoDepDetails" style="display:none;margin-bottom:16px"><div class="card" style="background:var(--bg-card)"><div class="sub-header"><h3><i class="fa fa-bitcoin-sign text-primary"></i> USDT (TRC-20) Address</h3></div><div class="crypto-addr"><div class="addr" id="cryptoAddress">TStockPulseUSDTAddressXXXXXXXXXXXXX</div><button class="btn btn-ghost btn-sm" onclick="copyText(document.getElementById('cryptoAddress').textContent,'Address copied!')"><i class="fa fa-copy"></i></button></div><p class="form-hint mt-8">⚠️ Only send USDT via TRC-20 network.</p></div></div>
                                 <div class="form-group"><label class="form-label">Upload Payment Proof</label><div class="file-upload-area" id="depositProofArea"><input type="file" id="depositProofFile" accept="image/*,application/pdf" onchange="handleFileUpload(this,'depositProofPreview','depositProofArea')" /><div class="file-upload-icon"><i class="fa fa-cloud-upload-alt"></i></div><div class="file-upload-text">Drop file or <strong>browse</strong></div><div class="file-upload-hint">JPEG, PNG, PDF — Max 10MB</div></div><div id="depositProofPreview"></div></div>
                                 <button class="btn btn-primary btn-full" onclick="initiateDeposit()"><i class="fa fa-check"></i> Submit Deposit</button>
                             </div>
                             <div>
-                                <div class="card mb-20"><div class="card-title mb-12">Deposit Stats</div><div class="stat-card gold mb-12"><div class="stat-icon gold"><i class="fa fa-arrow-down"></i></div><div class="stat-value" id="totalDeposited">₦0.00</div><div class="stat-label">Total Deposited</div></div><div class="info-row"><span class="key">Pending</span><span class="val" id="depPending">0</span></div><div class="info-row"><span class="key">Approved</span><span class="val text-emerald" id="depApproved">0</span></div><div class="info-row"><span class="key">Rejected</span><span class="val text-rose" id="depRejected">0</span></div></div>
+                                <div class="card mb-20"><div class="card-title mb-12">Deposit Stats</div><div class="stat-card gold mb-12"><div class="stat-icon gold"><i class="fa fa-arrow-down-to-line"></i></div><div class="stat-value" id="totalDeposited">₦0.00</div><div class="stat-label">Total Deposited</div></div><div class="info-row"><span class="key">Pending</span><span class="val" id="depPending">0</span></div><div class="info-row"><span class="key">Approved</span><span class="val text-emerald" id="depApproved">0</span></div><div class="info-row"><span class="key">Rejected</span><span class="val text-rose" id="depRejected">0</span></div></div>
                                 <div class="card"><div class="card-title mb-12">💡 Deposit Info</div><p class="text-sm text-muted" style="line-height:1.7">After making a transfer, upload your payment proof. Our team reviews deposits within <strong style="color:var(--text-primary)">1–4 hours</strong>.</p><div class="sep-line"></div><div class="info-row"><span class="key">Min Deposit</span><span class="val text-primary font-mono">₦3,000</span></div><div class="info-row"><span class="key">Processing Time</span><span class="val">1–4 hrs</span></div><div class="info-row"><span class="key">Deposit Fee</span><span class="val text-emerald">Free</span></div></div>
                             </div>
                         </div>
@@ -2883,7 +2871,7 @@
                                 <div class="card-title mb-16">Withdrawal Request</div>
                                 <div class="alert alert-warning" style="background:rgba(251,191,36,0.1);border-left:3px solid #fbbf24;padding:12px;margin-bottom:16px"><i class="fa fa-clock"></i> <strong>Admin Approval Required</strong><br>Withdrawals are processed within 1–3 business days after admin review.</div>
                                 <div class="form-group"><label class="form-label">Amount (₦)</label><div class="input-icon-wrap"><i class="icon fa fa-naira-sign"></i><input type="number" class="form-input" id="withdrawAmount" placeholder="Min. ₦4,000" min="4000" oninput="calcWithdrawalFee()" /></div><div class="form-hint">Minimum withdrawal: ₦4,000</div></div>
-                                <div class="summary-box" id="withdrawSummary" style="display:none"><div class="summary-row"><span class="label">Requested Amount</span><span class="value font-mono" id="wAmtReq">₦0</span></div><div class="summary-row"><span class="label">Platform Fee (10%)</span><span class="value text-rose font-mono" id="wFee">-₦0</span></div><div class="summary-row"><span class="label">You Receive</span><span class="value text-emerald font-mono fw-600" id="wNet">₦0</span></div></div>
+                                <div class="summary-box" id="withdrawSummary" style="display:none"><div class="summary-row"><span class="label">Requested Amount</span><span class="value font-mono" id="wAmtReq">₦0</span></div><div class="summary-row"><span class="label">Platform Fee (10%)</span><span class="value text-rose font-mono" id="wFee">-₦0</span></div><div class="summary-row"><span class="label">You Receive</span><span class="value emerald font-mono fw-600" id="wNet">₦0</span></div></div>
                                 <div class="form-group"><label class="form-label">Payment Method</label><select class="form-input" id="withdrawMethod"><option value="bank_transfer">Bank Transfer</option><option value="crypto">Crypto (USDT)</option><option value="paypal">PayPal</option></select></div>
                                 <div class="card" style="background:rgba(56,189,248,0.05);border-color:rgba(56,189,248,0.15);margin-bottom:16px"><div class="d-flex ai-center gap-8 mb-8"><i class="fa fa-building-columns" style="color:var(--accent-sky)"></i><span class="fw-600 text-sm">Payout Bank Details</span></div><div id="bankDetailsPreview"><p class="text-sm text-muted">No bank details on file. Add in Profile → Bank Details.</p><button class="btn btn-ghost btn-sm mt-8" onclick="navigateTo('profile-section')"><i class="fa fa-plus"></i> Add Bank Details</button></div></div>
                                 <button class="btn btn-primary btn-full" onclick="submitWithdrawal()" id="withdrawSubmitBtn"><i class="fa fa-paper-plane"></i> Request Withdrawal</button>
@@ -2920,7 +2908,7 @@
                     <div class="breadcrumb"><i class="fa fa-home"></i><span>/</span><span>Support</span></div>
                     <div class="section-header"><h1>Support Center</h1><p>We're here to help with any questions or issues</p></div>
                     <div class="tabs"><button class="tab-btn active" onclick="switchSuppTab('new',this)">➕ New Ticket</button><button class="tab-btn" onclick="switchSuppTab('tickets',this)">📋 My Tickets</button><button class="tab-btn" onclick="switchSuppTab('faq',this)">❓ FAQ</button></div>
-                    <div id="suppTabNew"><div class="grid-2"><div class="card"><div class="card-title mb-16">Create Support Ticket</div><div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" id="ticketSubject" placeholder="Brief description" /></div><div class="form-row"><div class="form-group"><label class="form-label">Category</label><select class="form-input" id="ticketCategory"><option value="general">General</option><option value="technical">Technical</option><option value="investment">Investment</option><option value="withdrawal">Withdrawal</option><option value="deposit">Deposit</option><option value="kyc">KYC</option><option value="account">Account</option><option value="other">Other</option></select></div><div class="form-group"><label class="form-label">Priority</label><select class="form-input" id="ticketPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></div></div><div class="form-group"><label class="form-label">Message</label><textarea class="form-input" id="ticketMessage" placeholder="Describe your issue..." style="min-height:100px"></textarea></div><div class="form-group"><label class="form-label">Attachments (optional)</label><div class="file-upload-area"><input type="file" id="ticketAttachments" accept="image/*,application/pdf" multiple onchange="handleFileUpload(this,'ticketAttachPreview',null)" /><div class="file-upload-icon"><i class="fa fa-paperclip"></i></div><div class="file-upload-text">Attach screenshot or file</div></div><div id="ticketAttachPreview"></div></div><button class="btn btn-primary btn-full" onclick="submitTicket()"><i class="fa fa-paper-plane"></i> Submit Ticket</button></div><div><div class="card mb-20"><div class="card-title mb-12">📞 Quick Contact</div><div class="info-row"><span class="key"><i class="fa fa-envelope"></i> Email</span><span class="val">support@stockpulse.com</span></div><div class="info-row"><span class="key"><i class="fab fa-whatsapp"></i> WhatsApp</span><span class="val">+234 708 447 2673</span></div><div class="info-row"><span class="key"><i class="fa fa-clock"></i> Hours</span><span class="val">Mon–Sat, 8am–8pm</span></div><div class="info-row"><span class="key"><i class="fa fa-stopwatch"></i> Response</span><span class="val text-emerald">Within 4 hours</span></div></div><div class="card"><div class="card-title mb-12">⚡ Response Times</div><div class="info-row"><span class="key"><span class="badge badge-danger">Urgent</span></span><span class="val">Under 2 hours</span></div><div class="info-row"><span class="key"><span class="badge badge-warning">High</span></span><span class="val">Under 4 hours</span></div><div class="info-row"><span class="key"><span class="badge badge-info">Medium</span></span><span class="val">Same day</span></div><div class="info-row"><span class="key"><span class="badge badge-muted">Low</span></span><span class="val">1–2 business days</span></div></div></div></div></div>
+                    <div id="suppTabNew"><div class="grid-2"><div class="card"><div class="card-title mb-16">Create Support Ticket</div><div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" id="ticketSubject" placeholder="Brief description" /></div><div class="form-row"><div class="form-group"><label class="form-label">Category</label><select class="form-input" id="ticketCategory"><option value="general">General</option><option value="technical">Technical</option><option value="investment">Investment</option><option value="withdrawal">Withdrawal</option><option value="deposit">Deposit</option><option value="kyc">KYC</option><option value="account">Account</option><option value="other">Other</option></select></div><div class="form-group"><label class="form-label">Priority</label><select class="form-input" id="ticketPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></div></div><div class="form-group"><label class="form-label">Message</label><textarea class="form-input" id="ticketMessage" placeholder="Describe your issue..." style="min-height:100px"></textarea></div><div class="form-group"><label class="form-label">Attachments (optional)</label><div class="file-upload-area"><input type="file" id="ticketAttachments" accept="image/*,application/pdf" multiple onchange="handleFileUpload(this,'ticketAttachPreview',null)" /><div class="file-upload-icon"><i class="fa fa-paperclip"></i></div><div class="file-upload-text">Attach screenshot or file</div></div><div id="ticketAttachPreview"></div></div><button class="btn btn-primary btn-full" onclick="submitTicket()"><i class="fa fa-paper-plane"></i> Submit Ticket</button></div><div><div class="card mb-20"><div class="card-title mb-12">📞 Quick Contact</div><div class="info-row"><span class="key"><i class="fa fa-envelope"></i> Email</span><span class="val">support@stockpulse.com</span></div><div class="info-row"><span class="key"><i class="fab fa-whatsapp"></i> WhatsApp</span><span class="val">+234 800 STOCK 01</span></div><div class="info-row"><span class="key"><i class="fa fa-clock"></i> Hours</span><span class="val">Mon–Sat, 8am–8pm</span></div><div class="info-row"><span class="key"><i class="fa fa-stopwatch"></i> Response</span><span class="val text-emerald">Within 4 hours</span></div></div><div class="card"><div class="card-title mb-12">⚡ Response Times</div><div class="info-row"><span class="key"><span class="badge badge-danger">Urgent</span></span><span class="val">Under 2 hours</span></div><div class="info-row"><span class="key"><span class="badge badge-warning">High</span></span><span class="val">Under 4 hours</span></div><div class="info-row"><span class="key"><span class="badge badge-info">Medium</span></span><span class="val">Same day</span></div><div class="info-row"><span class="key"><span class="badge badge-muted">Low</span></span><span class="val">1–2 business days</span></div></div></div></div></div>
                     <div id="suppTabTickets" style="display:none"><div class="table-wrap responsive-table"><table><thead><tr><th>Ticket ID</th><th>Subject</th><th>Category</th><th>Priority</th><th>Date</th><th>Status</th></tr></thead><tbody id="ticketsTable"></tbody></table></div></div>
                     <div id="suppTabFaq" style="display:none"><div class="card"><div class="card-title mb-16">Frequently Asked Questions</div><div id="faqList"></div></div></div>
                 </section>
@@ -2942,7 +2930,7 @@
                     <div class="tabs"><button class="tab-btn active" onclick="switchProfTab('info',this)">👤 Personal Info</button><button class="tab-btn" onclick="switchProfTab('security',this)">🔒 Security</button><button class="tab-btn" onclick="switchProfTab('bank',this)">🏦 Bank Details</button><button class="tab-btn" onclick="switchProfTab('prefs',this)">⚙️ Preferences</button></div>
                     <div id="profTabInfo"><div class="card"><div class="avatar-upload"><div class="avatar-lg" id="profileAvatarLg">SP</div><div class="avatar-info"><h3 id="profileNameLg">Loading...</h3><p id="profileEmailLg">loading@example.com</p><button class="btn btn-ghost btn-sm mt-8" id="changePhotoBtn"><i class="fa fa-camera"></i> Change Photo</button></div></div><div class="form-row"><div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="profName" /></div><div class="form-group"><label class="form-label">Phone Number</label><input type="tel" class="form-input" id="profPhone" /></div></div><div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" id="profEmail" disabled style="opacity:0.6" /></div><div class="form-row"><div class="form-group"><label class="form-label">Risk Tolerance</label><select class="form-input" id="profRisk"><option value="low">Conservative (Low Risk)</option><option value="medium" selected>Balanced (Medium Risk)</option><option value="high">Aggressive (High Risk)</option></select></div><div class="form-group"><label class="form-label">Investment Strategy</label><select class="form-input" id="profStrategy"><option value="conservative">Conservative</option><option value="balanced" selected>Balanced</option><option value="aggressive">Aggressive</option></select></div></div><div class="form-group"><label class="form-label">Country</label><input type="text" class="form-input" id="profCountry" placeholder="e.g., Nigeria" /></div><button class="btn btn-primary" onclick="updateProfile()"><i class="fa fa-save"></i> Save Changes</button></div></div>
                     <div id="profTabSecurity" style="display:none"><div class="card"><div class="card-title mb-16">Change Password</div><div class="form-group"><label class="form-label">Current Password</label><div class="input-icon-wrap"><i class="icon fa fa-lock"></i><input type="password" class="form-input" id="currentPass" placeholder="Current password" /><span class="eye-toggle" onclick="togglePassword('currentPass')"><i class="fa fa-eye"></i></span></div></div><div class="form-group"><label class="form-label">New Password</label><div class="input-icon-wrap"><i class="icon fa fa-lock"></i><input type="password" class="form-input" id="newPass" placeholder="Min. 8 characters" /><span class="eye-toggle" onclick="togglePassword('newPass')"><i class="fa fa-eye"></i></span></div></div><div class="form-group"><label class="form-label">Confirm New Password</label><div class="input-icon-wrap"><i class="icon fa fa-lock"></i><input type="password" class="form-input" id="confirmPass" placeholder="Repeat new password" /><span class="eye-toggle" onclick="togglePassword('confirmPass')"><i class="fa fa-eye"></i></span></div></div><button class="btn btn-primary" onclick="changePassword()"><i class="fa fa-shield-alt"></i> Update Password</button><div class="sep-line"></div><div class="card-title mb-12">Two-Factor Authentication</div><div class="d-flex ai-center jc-between"><div><p class="fw-600">2FA via Authenticator App</p><p class="text-sm text-muted">Add extra security</p></div><button class="btn btn-outline btn-sm" id="enable2faBtn" onclick="enable2FA()">Enable 2FA</button></div><div class="sep-line"></div><div class="card-title mb-12">Login History</div><div class="table-wrap"><table><thead><tr><th>Device</th><th>Location</th><th>Date</th><th>Status</th></tr></thead><tbody id="loginHistoryTable"></tbody></table></div></div></div>
-                    <div id="profTabBank" style="display:none"><div class="card"><div class="card-title mb-16">Bank Account Details</div><div class="form-group"><label class="form-label">Bank Name</label><select class="form-input" id="bankName"><option>Select Bank</option><option>Access Bank</option><option>First Bank</option><option>GTBank</option><option>UBA</option><option>Zenith Bank</option><option>Opay</option><option>PalmPay</option><option>Ecobank</option><option>Fidelity Bank</option><option>FCMB</option><option>Stanbic IBTC</option><option>Sterling Bank</option><option>Wema Bank</option><option>Keystone Bank</option><option>Polaris Bank</option><option>Union Bank</option><option>Heritage Bank</option><option>Other</option></select></div><div class="form-group"><label class="form-label">Account Name</label><input type="text" class="form-input" id="bankAccountName" placeholder="Account holder name" /></div><div class="form-group"><label class="form-label">Account Number</label><input type="text" class="form-input" id="bankAccountNumber" placeholder="10-digit account number" maxlength="10" /></div><div class="form-group"><label class="form-label">Bank Code (optional)</label><input type="text" class="form-input" id="bankCode" placeholder="e.g., 057" /></div><div id="bankVerifiedStatus" style="display:none" class="d-flex ai-center gap-8 mb-16"><span class="badge badge-success"><i class="fa fa-check"></i> Verified</span><span class="text-sm text-muted">Your bank account is verified</span></div><button class="btn btn-primary" onclick="saveBankDetails()"><i class="fa fa-save"></i> Save Bank Details</button><button class="btn btn-outline mt-8" onclick="requestBankVerification()"><i class="fa fa-shield-check"></i> Request Verification</button></div></div>
+                    <div id="profTabBank" style="display:none"><div class="card"><div class="card-title mb-16">Bank Account Details</div><div class="form-group"><label class="form-label">Bank Name</label><select class="form-input" id="bankName"><option>Select Bank</option><option>Access Bank</option><option>First Bank</option><option>GTBank</option><option>UBA</option><option>Opay</option><option>Zenith Bank</option><option>Ecobank</option><option>Fidelity Bank</option><option>FCMB</option><option>Stanbic IBTC</option><option>Sterling Bank</option><option>Wema Bank</option><option>Keystone Bank</option><option>Polaris Bank</option><option>Union Bank</option><option>Heritage Bank</option><option>Other</option></select></div><div class="form-group"><label class="form-label">Account Name</label><input type="text" class="form-input" id="bankAccountName" placeholder="Account holder name" /></div><div class="form-group"><label class="form-label">Account Number</label><input type="text" class="form-input" id="bankAccountNumber" placeholder="10-digit account number" maxlength="10" /></div><div class="form-group"><label class="form-label">Bank Code (optional)</label><input type="text" class="form-input" id="bankCode" placeholder="e.g., 057" /></div><div id="bankVerifiedStatus" style="display:none" class="d-flex ai-center gap-8 mb-16"><span class="badge badge-success"><i class="fa fa-check"></i> Verified</span><span class="text-sm text-muted">Your bank account is verified</span></div><button class="btn btn-primary" onclick="saveBankDetails()"><i class="fa fa-save"></i> Save Bank Details</button><button class="btn btn-outline mt-8" onclick="requestBankVerification()"><i class="fa fa-shield-check"></i> Request Verification</button></div></div>
                     <div id="profTabPrefs" style="display:none"><div class="card"><div class="card-title mb-16">Notification Preferences</div><div class="info-row"><div><div class="fw-600">Email Notifications</div><div class="text-sm text-muted">Receive updates via email</div></div><label class="form-check"><input type="checkbox" id="prefEmailNotif" checked /></label></div><div class="info-row"><div><div class="fw-600">Investment Alerts</div><div class="text-sm text-muted">Maturity and earning alerts</div></div><label class="form-check"><input type="checkbox" id="prefInvAlerts" checked /></label></div><div class="info-row"><div><div class="fw-600">Deposit Confirmations</div><div class="text-sm text-muted">When deposits are approved</div></div><label class="form-check"><input type="checkbox" id="prefDepConf" checked /></label></div><div class="info-row"><div><div class="fw-600">Marketing Messages</div><div class="text-sm text-muted">New plans and promotions</div></div><label class="form-check"><input type="checkbox" id="prefMarketing" /></label></div><div class="sep-line"></div><div class="card-title mb-12">Display Settings</div><div class="info-row"><div><div class="fw-600">Dark Mode</div><div class="text-sm text-muted">Use dark color theme</div></div><label class="form-check"><input type="checkbox" id="prefDarkMode" checked onchange="toggleTheme()" /></label></div><button class="btn btn-primary mt-16" onclick="savePreferences()"><i class="fa fa-save"></i> Save Preferences</button></div></div>
                 </section>
                 <section id="admin-section" class="section">
@@ -2971,31 +2959,20 @@
         <button class="fab-mobile" onclick="openFabMenu()"><i class="fa fa-plus"></i></button>
     </div>
     <script>
-        const APP_NAME = 'StockPulse';
+        const APP_NAME = 'Stock Pulse';
         const BRAND_PREFIX = 'stockpulse_';
         const API_URL = 'https://real-wealthy-1-1.onrender.com/api';
-        const TOKEN_EXPIRY_DAYS = 30;
         const CURRENCY_RATES = { NGN: 1, USD: 0.00065, EUR: 0.00060, GBP: 0.00052, GHS: 0.0087, KES: 0.085, ZAR: 0.012 };
         const CURRENCY_SYMBOLS = { NGN: '₦', USD: '$', EUR: '€', GBP: '£', GHS: '₵', KES: 'KSh ', ZAR: 'R ' };
         let appState = { currentUser: null, currentSection: 'login-section', investments: [], deposits: [], withdrawals: [],
             transactions: [], notifications: [], referrals: [], tickets: [], currency: 'NGN', theme: 'dark',
             selectedPlan: null, installPrompt: null, plans: [], lastDepositTimestamp: null, pendingDepositData: null,
-            deferredPrompt: null };
-        const StateManager = {
-            save(key, data) { try { localStorage.setItem(BRAND_PREFIX + key, JSON.stringify(data)); } catch (e) {} },
-            load(key, def = null) { try { const d = localStorage.getItem(BRAND_PREFIX + key); return d ? JSON.parse(d) :
-                    def; } catch (e) { return def; } },
-            remove(key) { try { localStorage.removeItem(BRAND_PREFIX + key); } catch (e) {} },
-            clear() { try { Object.keys(localStorage).forEach(k => { if (k.startsWith(BRAND_PREFIX)) localStorage
-                        .removeItem(k); }); } catch (e) {} },
-            checkTokenExpiry() { const tokenData = this.load('token_data'); if (tokenData && tokenData.expiresAt) { if (Date
-                    .now() > tokenData.expiresAt) { this.remove('token');
-                    this.remove('token_data');
-                    this.remove('user'); return true; } } return false; },
-            saveToken(token) { this.save('token', token);
-            this.save('token_data', { savedAt: Date.now(), expiresAt: Date.now() + (TOKEN_EXPIRY_DAYS * 24 * 60 * 60 *
-                    1000) }); }
-        };
+            isOnline: true };
+        const StateManager = { save(key, data) { try { localStorage.setItem(BRAND_PREFIX + key, JSON.stringify(data)); } catch (
+            e) {} }, load(key, def = null) { try { const d = localStorage.getItem(BRAND_PREFIX + key); return d ? JSON.parse(
+                d) : def; } catch (e) { return def; } }, remove(key) { try { localStorage.removeItem(BRAND_PREFIX + key); } catch (
+            e) {} }, clear() { try { Object.keys(localStorage).forEach(k => { if (k.startsWith(BRAND_PREFIX)) localStorage
+            .removeItem(k); }); } catch (e) {} } };
         const CurrencyManager = { current: 'NGN', format(amount, currency = null) { const cur = currency || this.current;
                 const rate = CURRENCY_RATES[cur] || 1; const sym = CURRENCY_SYMBOLS[cur] || '₦'; const converted = amount *
                 rate; if (converted >= 1000000) return sym + (converted / 1000000).toFixed(2) + 'M'; if (converted >= 1000)
@@ -3006,9 +2983,8 @@
         const ApiService = { async request(endpoint, opts = {}) { const token = StateManager.load('token'); const headers = { ...
                     (token && { 'Authorization': `Bearer ${token}` }), ...opts.headers }; const url =
                     `${API_URL}${endpoint}`; try { const res = await fetch(url, { ...opts, headers }); if (!res
-                    .ok) { const errorData = await res.json().catch(() => ({})); if (res.status === 401 && (errorData
-                        .message === 'Invalid token' || errorData.message === 'Token expired')) { Toast.error(
-                            'Session Expired', 'Please log in again.');
+                    .ok) { const errorData = await res.json().catch(() => ({})); if (res.status === 401 && errorData
+                        .message === 'Invalid token') { Toast.error('Session Expired', 'Please log in again.');
                         handleLogout(); throw new Error('Session expired'); } throw new Error(errorData.message ||
                         `HTTP ${res.status}`); } const json = await res.json(); if (!json.success) throw new Error(json
                     .message); return json.data; } catch (error) { console.error('API Error:', error); throw error; } },
@@ -3021,7 +2997,8 @@
                         'Authorization'] = `Bearer ${token}`; } return this.request(endpoint, { method: 'POST',
                     headers, body: formData }); }, };
         const Toast = { show(type, title, msg, dur = 4000) { const icons = { success: 'fa-check-circle', error: 'fa-times-circle',
-                    warning: 'fa-exclamation-triangle', info: 'fa-info-circle' }; const el = document.createElement('div');
+                    warning: 'fa-exclamation-triangle', info: 'fa-info-circle' }; const el = document
+                    .createElement('div');
                 el.className = `toast ${type}`;
                 el.innerHTML = `<i class="toast-icon fa ${icons[type]||icons.info}"></i><div class="toast-content"><div class="toast-title">${title}</div>${msg?`<div class="toast-msg">${msg}</div>`:''}<div class="toast-progress"><div class="toast-progress-bar" id="tpb${Date.now()}"></div></div></div><i class="toast-close fa fa-times" onclick="this.closest('.toast').remove()"></i>`;
                 document.getElementById('toastContainer').appendChild(el); const bar = el.querySelector(
@@ -3065,40 +3042,43 @@
                 loadSupport(); break; case 'reports-section': break; case 'profile-section':
                 loadProfile(); break; case 'admin-section':
                 loadAdmin(); break; } }
-        async function handleLogin() { const email = document.getElementById('loginEmail').value.trim(); const pass = document
-                .getElementById('loginPassword').value; if (!email || !pass) return Toast.warning('Missing Fields',
+        async function handleLogin() { const email = document.getElementById('loginEmail').value.trim(); const pass =
+            document.getElementById('loginPassword').value; if (!email || !pass) return Toast.warning('Missing Fields',
                 'Please enter email and password.');
-            showLoader('Signing you in...'); try { const data = await ApiService.post('/auth/login', { email, password: pass });
-                StateManager.saveToken(data.token);
+            showLoader('Signing you in...'); try { const data = await ApiService.post('/auth/login', { email,
+                    password: pass });
+                StateManager.save('token', data.token);
                 StateManager.save('user', data.user);
                 appState.currentUser = data.user;
                 appState.lastDepositTimestamp = StateManager.load('lastDepositTimestamp', null);
                 initApp();
-                Toast.success('Welcome back!', `Good to see you, ${data.user.full_name.split(' ')[0]}! Your session is valid for ${TOKEN_EXPIRY_DAYS} days.`); } catch (
+                Toast.success('Welcome back!', `Good to see you, ${data.user.full_name.split(' ')[0]}!`); } catch (
             err) { Toast.error('Login Failed', err.message); } finally { hideLoader(); } }
         async function loginAsDemo() { document.getElementById('loginEmail').value = 'investor@demo.com'; document
             .getElementById('loginPassword').value = 'Demo123456'; await handleLogin(); }
         async function handleRegister() { const fn = document.getElementById('regFirstName').value.trim(); const ln = document
-                .getElementById('regLastName').value.trim(); const email = document.getElementById('regEmail').value.trim();
-            const phone = document.getElementById('regPhone').value.trim(); const pass = document.getElementById('regPassword')
-                .value; const ref = document.getElementById('regReferral').value.trim(); const agree = document.getElementById(
-                'agreeTerms').checked; if (!fn || !ln || !email || !pass) return Toast.warning('Missing Fields',
-                'Please fill all required fields.'); if (!agree) return Toast.warning('Terms Required',
-                'Please accept the terms of service.'); if (pass.length < 6) return Toast.error('Weak Password',
-                'Password must be at least 6 characters.');
-            showLoader('Creating your account...'); try { const data = await ApiService.post('/auth/register', { full_name: `${fn} ${ln}`,
-                    email, phone, password: pass, referral_code: ref || undefined });
-                StateManager.saveToken(data.token);
+                .getElementById('regLastName').value.trim(); const email = document.getElementById('regEmail').value
+                .trim(); const phone = document.getElementById('regPhone').value.trim(); const pass = document
+                .getElementById('regPassword').value; const ref = document.getElementById('regReferral').value.trim();
+            const agree = document.getElementById('agreeTerms').checked; if (!fn || !ln || !email || !pass) return Toast
+                .warning('Missing Fields', 'Please fill all required fields.'); if (!agree) return Toast.warning(
+                'Terms Required', 'Please accept the terms of service.'); if (pass.length < 6) return Toast.error(
+                'Weak Password', 'Password must be at least 6 characters.');
+            showLoader('Creating your account...'); try { const data = await ApiService.post('/auth/register', {
+                    full_name: `${fn} ${ln}`,
+                    email,
+                    phone,
+                    password: pass,
+                    referral_code: ref || undefined });
+                StateManager.save('token', data.token);
                 StateManager.save('user', data.user);
                 appState.currentUser = data.user;
                 appState.lastDepositTimestamp = null;
                 initApp();
-                Toast.success('Account Created!',
-                    `Welcome to StockPulse! Your session is valid for ${TOKEN_EXPIRY_DAYS} days.`); } catch (err) { Toast.error(
+                Toast.success('Account Created!', `Welcome to Stock Pulse!`); } catch (err) { Toast.error(
                     'Registration Failed', err.message); } finally { hideLoader(); } }
 
         function handleLogout() { StateManager.remove('token');
-            StateManager.remove('token_data');
             StateManager.remove('user');
             StateManager.remove('lastDepositTimestamp');
             appState.currentUser = null;
@@ -3112,10 +3092,7 @@
             showLoader('Sending reset link...'); try { await ApiService.post('/auth/forgot-password', { email });
                 Toast.success('Reset link sent', 'Check your email inbox.'); } catch (err) { Toast.error('Failed', err
                     .message); } finally { hideLoader(); } }
-        async function initApp() { if (StateManager.checkTokenExpiry()) { showSection('login-section');
-                Toast.warning('Session Expired',
-                    `Your ${TOKEN_EXPIRY_DAYS}-day session has expired. Please log in again.`); return; }
-            document.getElementById('appLayout').style.display = 'flex';
+        async function initApp() { document.getElementById('appLayout').style.display = 'flex';
             document.getElementById('bottomNav').style.display = 'flex';
             document.getElementById('login-section').classList.remove('active');
             document.getElementById('register-section').classList.remove('active'); try { const profileData = await ApiService
@@ -3131,16 +3108,10 @@
             loadDashboard(); const user = appState.currentUser; if (user.role === 'admin' || user.role === 'super_admin') { document
                     .getElementById('adminNavItem').style.display = 'flex'; } if (user.kyc_status !== 'verified') { document
                     .getElementById('kycBadge').style.display = 'flex'; }
-            document.getElementById('navTicker').style.display = '';
-            checkTokenExpiryWarning(); }
+            document.getElementById('navTicker').style.display = ''; }
 
-        function checkTokenExpiryWarning() { const tokenData = StateManager.load('token_data'); if (tokenData && tokenData
-                .expiresAt) { const daysLeft = Math.ceil((tokenData.expiresAt - Date.now()) / (24 * 60 * 60 * 1000)); if (
-                    daysLeft <= 3 && daysLeft > 0) { Toast.info('Session Reminder',
-                        `Your session expires in ${daysLeft} day(s). Please log out and log in again to renew.`, 6000); } } }
-
-        function updateUserUI() { const u = appState.currentUser; if (!u) return; const initials = u.full_name.split(' ').map(
-            n => n[0]).join('').substring(0, 2).toUpperCase();
+        function updateUserUI() { const u = appState.currentUser; if (!u) return; const initials = u.full_name.split(' ')
+            .map(n => n[0]).join('').substring(0, 2).toUpperCase();
             document.getElementById('navAvatar').textContent = initials;
             document.getElementById('sidebarAvatar').textContent = initials;
             document.getElementById('sidebarName').textContent = u.full_name;
@@ -3238,8 +3209,8 @@
                         fill: true,
                         tension: 0.4,
                     }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false },
-                        tooltip: { mode: 'index', intersect: false, backgroundColor: 'rgba(17,24,39,0.95)',
-                            borderColor: 'rgba(59,130,246,0.3)', borderWidth: 1, titleColor: '#f1f5f9',
+                        tooltip: { mode: 'index', intersect: false, backgroundColor: 'rgba(30,41,59,0.9)',
+                            borderColor: 'rgba(59,130,246,0.3)', borderWidth: 1, titleColor: '#f8fafc',
                             bodyColor: '#cbd5e1', bodyFont: { size: 13 }, titleFont: { size: 13 },
                             callbacks: { label: ctx => '₦' + ctx.raw.toLocaleString('en-US', {
                                     minimumFractionDigits: 0, maximumFractionDigits: 0 }) } } },
@@ -3354,7 +3325,6 @@
                 loadDashboard(); if (appState.currentSection === 'investments-section') { renderMyInvestments(); } } catch (
             err) { console.error('Investment error:', err);
                 Toast.error('Investment Failed', err.message || 'Please try again later.'); } finally { hideLoader(); } }
-
         async function loadDeposits() { const u = appState.currentUser;
             document.getElementById('totalDeposited').textContent = CurrencyManager.formatFull(u.total_deposits || 0); try { const
                     data = await ApiService.get('/deposits');
@@ -3370,7 +3340,7 @@
                 `<tr><td colspan="6"><div class="empty-state"><i class="fa fa-inbox"></i><h4>No deposits yet</h4></div></td></tr>`;
                 return; }
             tbody.innerHTML = appState.deposits.map(d => `
-<tr><td data-label="Reference" class="td-mono text-sm">${d.reference}</td><td data-label="Amount" class="td-mono">${CurrencyManager.format(d.amount)}</td><td data-label="Method">${d.payment_method==='bank_transfer'?'<i class="fa fa-building-columns"></i> Bank':'<i class="fa fa-bitcoin-sign"></i> Crypto'}</td><td data-label="Date" class="text-sm">${formatDate(d.createdAt)}</td><td data-label="Status">${statusBadge(d.status)}</td><td data-label="Proof">${d.payment_proof_url?`<button class="btn btn-ghost btn-sm" onclick="viewProof('${d.payment_proof_url}')"><i class="fa fa-eye"></i> View</button>`:'<span class="text-muted text-xs">—</span>'}</td></tr>`)
+<tr><td data-label="Reference" class="td-mono text-sm">${d.reference}</td><td data-label="Amount" class="td-mono">${CurrencyManager.format(d.amount)}</td><td data-label="Method">${d.payment_method==='bank_transfer'?'<i class="fa fa-building-columns"></i> Opay':'<i class="fa fa-bitcoin-sign"></i> Crypto'}</td><td data-label="Date" class="text-sm">${formatDate(d.createdAt)}</td><td data-label="Status">${statusBadge(d.status)}</td><td data-label="Proof">${d.payment_proof_url?`<button class="btn btn-ghost btn-sm" onclick="viewProof('${d.payment_proof_url}')"><i class="fa fa-eye"></i> View</button>`:'<span class="text-muted text-xs">—</span>'}</td></tr>`)
                 .join(''); }
 
         function validateDeposit() { const amt = parseFloat(document.getElementById('depositAmount').value); const err =
@@ -3577,10 +3547,10 @@
             copyText(link, 'Referral link copied!'); }
 
         function shareReferral(platform) { const link = document.getElementById('refLink').textContent; const msg =
-                `Join StockPulse and earn daily returns. Use my referral link – you get 20% commission on your first investment! ${link}`;
-            const urls = { whatsapp: `https://wa.me/?text=${encodeURIComponent(msg)}`, telegram: `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Join StockPulse!')}`,
+                `Join Stock Pulse and earn daily returns. Use my referral link – you get 20% commission on your first investment! ${link}`;
+            const urls = { whatsapp: `https://wa.me/?text=${encodeURIComponent(msg)}`, telegram: `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Join Stock Pulse!')}`,
                 facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`, twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`, }; if (
-                navigator.share && (platform === 'share')) { navigator.share({ title: 'StockPulse', text: msg,
+                navigator.share && (platform === 'share')) { navigator.share({ title: 'Stock Pulse', text: msg,
                     url: link }); } else if (urls[platform]) { window.open(urls[platform], '_blank',
                 'width=600,height=400'); } }
         async function loadSupport() { try { const data = await ApiService.get('/support/tickets');
@@ -3597,14 +3567,14 @@
 <tr><td data-label="Ticket ID" class="td-mono text-sm">${t.ticket_id}</td><td data-label="Subject" class="td-main">${t.subject}</td><td data-label="Category" class="text-sm">${t.category}</td><td data-label="Priority"><span class="badge ${priorityBadges[t.priority]||'badge-muted'}">${t.priority}</span></td><td data-label="Date" class="text-sm">${formatDate(t.createdAt)}</td><td data-label="Status">${statusBadge(t.status)}</td></tr>`)
                 .join(''); }
 
-        function renderFAQ() { const faqData = [{ q: 'How does StockPulse work?',
+        function renderFAQ() { const faqData = [{ q: 'How does Stock Pulse work?',
                     a: 'You deposit funds, choose a stock investment plan, and earn daily interest for the plan duration. Profits are credited to your wallet automatically.'
                 }, { q: 'What is the minimum investment amount?',
                     a: 'The minimum investment is ₦3,000. Different plans may have higher minimums based on the stock tier.'
                 }, { q: 'When can I withdraw my earnings?',
                     a: 'You can withdraw anytime once your withdrawable earnings (not deposit balance) meet the ₦4,000 minimum. Withdrawals are processed within 1–3 business days after admin approval. A 48-hour cooldown applies after each deposit.'
                 }, { q: 'Is my money safe?',
-                    a: 'StockPulse is CBN licensed and SEC registered. Client funds are held in segregated accounts with top-tier Nigerian banks.'
+                    a: 'Stock Pulse is CBN licensed and SEC registered. Client funds are held in segregated accounts with top-tier Nigerian banks.'
                 }, { q: 'What is KYC verification?',
                     a: 'Know Your Customer (KYC) is a regulatory requirement. Completing KYC unlocks higher withdrawal limits and premium investment plans.'
                 }, { q: 'How does the referral program work?',
@@ -3643,7 +3613,7 @@
                 t => document.getElementById('suppTab' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = t ===
                 tab ? '' : 'none'); }
 
-        function openReportsEmail() { window.location.href = 'mailto:israeldewa@gmail.com?subject=Report%20%2F%20Complaint%20-%20StockPulse&body=Please%20describe%20your%20complaint%20or%20report%20below%3A%0A%0A'; }
+        function openReportsEmail() { window.location.href = 'mailto:israeldewa@gmail.com?subject=Report%20%2F%20Complaint%20-%20Stock%20Pulse&body=Please%20describe%20your%20complaint%20or%20report%20below%3A%0A%0A'; }
         async function loadProfile() { try { const data = await ApiService.get('/profile'); const user = data.user;
                 appState.currentUser = user;
                 StateManager.save('user', user); const initials = user.full_name.split(' ').map(n => n[0]).join('')
@@ -3719,7 +3689,8 @@
             'prefs'].forEach(t => { const el = document.getElementById('profTab' + t.charAt(0).toUpperCase() + t.slice(
                     1)); if (el) el.style.display = t === tab ? '' : 'none'; }); }
 
-        function enable2FA() { Toast.info('2FA Setup', 'Two-factor authentication coming soon.'); }
+        function enable2FA() { Toast.info('2FA Setup',
+            'Two-factor authentication is not yet implemented in the demo backend.'); }
         async function loadAdmin() { try { const data = await ApiService.get('/admin/dashboard'); const stats = data.stats ||
                 {};
                 setText('adminTotalUsers', stats.overview?.total_users || 0);
@@ -3734,7 +3705,7 @@
 <tr><td data-label="Name"><div class="td-main">${u.full_name}</div></td><td data-label="Email" class="text-sm">${u.email}</td><td data-label="Balance" class="td-mono">${CurrencyManager.format(u.balance)}</td><td data-label="KYC">${statusBadge(u.kyc_status)}</td><td data-label="Joined" class="text-sm">${formatDate(u.createdAt)}</td><td data-label="Status"><span class="badge ${u.is_active?'badge-success':'badge-muted'}">${u.is_active?'Active':'Inactive'}</span></td><td data-label="Action"><button class="btn btn-ghost btn-sm" onclick="viewUser('${u._id}')">Manage</button></td></tr>`)
                     .join(''); } catch (err) { Toast.error('Failed to load admin data', err.message); } }
 
-        function viewUser(userId) { Toast.info('User management', 'Detailed view coming soon.'); }
+        function viewUser(userId) { Toast.info('User management', 'Detailed view not implemented in demo.'); }
 
         function switchAdminTab(tab, btn) { document.querySelectorAll('#admin-section .tabs .tab-btn').forEach(b => b
                 .classList.remove('active')); if (btn) btn.classList.add('active'); ['pending', 'users', 'deposits',
@@ -3837,29 +3808,30 @@
             'none'; }
 
         function openFabMenu() { Toast.info('Quick Actions', 'Navigate using bottom bar or sidebar'); }
-        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault();
-            appState.deferredPrompt = e; const banner = document.getElementById('installBanner'); if (banner && !window
+        window.addEventListener('beforeinstallprompt', e => { e.preventDefault();
+            appState.installPrompt = e; const banner = document.getElementById('installBanner'); if (banner && !window
                 .matchMedia('(display-mode: standalone)').matches) { banner.classList.remove('hidden'); } });
-        document.getElementById('installBtn')?.addEventListener('click', async () => { if (appState.deferredPrompt) {
-                appState.deferredPrompt.prompt(); const { outcome } = await appState.deferredPrompt.userChoice; if (
-                    outcome === 'accepted') { Toast.success('App Installed!',
-                    'StockPulse has been installed successfully.');
-                    appState.deferredPrompt = null; }
-                dismissInstall(); } else { Toast.info('Already Installed',
-                'StockPulse is already installed or installation is not available.'); } });
+        document.getElementById('installBtn')?.addEventListener('click', async () => { if (appState.installPrompt) {
+                appState.installPrompt.prompt(); const result = await appState.installPrompt.userChoice; if (result
+                    .outcome === 'accepted') { Toast.success('App Installed!',
+                    'Stock Pulse has been installed.'); if (navigator.vibrate) navigator.vibrate(200); }
+                dismissInstall(); } });
 
         function dismissInstall() { document.getElementById('installBanner').classList.add('hidden'); }
         window.addEventListener('appinstalled', () => { dismissInstall();
-            appState.deferredPrompt = null;
-            Toast.success('Installed!', 'StockPulse app installed successfully.'); });
-        if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register(
-                '/sw.js').then(reg => { console.log('Service Worker registered:', reg.scope); }).catch(err => { console
-                    .log('Service Worker registration failed:', err); }); }); }
-        window.addEventListener('online', () => { document.getElementById('offlineBanner').classList.remove('show');
+            Toast.success('Installed!', 'Stock Pulse app installed successfully.'); });
+
+        function updateOnlineStatus() { appState.isOnline = navigator.onLine; const banner = document.getElementById(
+                'offlineBanner'); if (banner) { if (!appState.isOnline) { banner.classList.add('show'); } else { banner
+                    .classList.remove('show'); } } }
+        window.addEventListener('online', () => { updateOnlineStatus();
             Toast.success('Back Online', 'Connection restored. Refreshing data...'); if (appState.currentUser)
                 loadSectionData(appState.currentSection); });
-        window.addEventListener('offline', () => { document.getElementById('offlineBanner').classList.add('show');
+        window.addEventListener('offline', () => { updateOnlineStatus();
             Toast.warning('Offline', 'No internet connection. Using cached data.'); });
+        updateOnlineStatus(); if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator
+                .serviceWorker.register('/sw.js').then(reg => console.log('SW registered:', reg)).catch(err => console
+                    .log('SW registration failed:', err)); }); }
 
         function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -3890,7 +3862,7 @@
             CurrencyManager.current = savedCur;
             appState.currency = savedCur; const curSel = document.getElementById('currencySelect'); if (curSel) curSel
                 .value = savedCur; const token = StateManager.load('token'); const user = StateManager.load('user'); if (
-                token && user && !StateManager.checkTokenExpiry()) { appState.currentUser = user;
+                token && user) { appState.currentUser = user;
                 appState.lastDepositTimestamp = StateManager.load('lastDepositTimestamp', null);
                 ApiService.get('/profile').then(data => { appState.currentUser = data.user;
                     StateManager.save('user', data.user);
@@ -3906,7 +3878,7 @@
                 socket = io('https://real-wealthy-1.onrender.com', { auth: { token }, transports: ['websocket',
                         'polling'
                     ], });
-                socket.on('connect', () => { console.log('StockPulse Socket connected');
+                socket.on('connect', () => { console.log('Socket connected');
                     socket.emit('join-user', appState.currentUser._id); if (appState.currentUser.role === 'admin' ||
                         appState.currentUser.role === 'super_admin') { socket.emit('admin-join', appState
                         .currentUser._id); } });
@@ -3927,7 +3899,7 @@
                         setText('totalDeposits', CurrencyManager.format(data.total_deposits || 0));
                         setText('totalWithdrawn', CurrencyManager.format(data.total_withdrawn));
                         setText('referralBonusTotal', CurrencyManager.format(data.referral_earnings)); } });
-                socket.on('disconnect', () => console.log('StockPulse Socket disconnected')); } const originalInitApp = initApp;
+                socket.on('disconnect', () => console.log('Socket disconnected')); } const originalInitApp = initApp;
             initApp = function() { originalInitApp();
                 initSocket(); }; if (appState.currentUser) { setTimeout(initSocket, 1000); } }
     </script>
